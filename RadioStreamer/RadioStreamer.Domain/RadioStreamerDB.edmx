@@ -1,0 +1,524 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RSDB_Context.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Channel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="PageUrl" Type="bigint" Nullable="false" />
+          <Property Name="StreamUrl" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Favourite">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
+          <Property Name="ChannelId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="History">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
+          <Property Name="ChannelId" Type="bigint" Nullable="false" />
+          <Property Name="StartDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="EndDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Value" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
+          <Property Name="ChannelId" Type="bigint" Nullable="false" />
+          <Property Name="Value" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TagsChannels">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TagId" Type="bigint" Nullable="false" />
+          <Property Name="ChannelId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Salt" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Favourite_Channels">
+          <End Role="Channel" Type="Self.Channel" Multiplicity="1" />
+          <End Role="Favourite" Type="Self.Favourite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Channel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Favourite">
+              <PropertyRef Name="ChannelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Favourite_Users">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Favourite" Type="Self.Favourite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Favourite">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_History_Channels">
+          <End Role="Channel" Type="Self.Channel" Multiplicity="1" />
+          <End Role="History" Type="Self.History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Channel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="History">
+              <PropertyRef Name="ChannelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_History_Users">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="History" Type="Self.History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="History">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rating_Channels">
+          <End Role="Channel" Type="Self.Channel" Multiplicity="1" />
+          <End Role="Rating" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Channel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="ChannelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rating_Users">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Rating" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TagsChannels_Channels">
+          <End Role="Channel" Type="Self.Channel" Multiplicity="1" />
+          <End Role="TagsChannels" Type="Self.TagsChannels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Channel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TagsChannels">
+              <PropertyRef Name="ChannelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TagsChannels_Tags">
+          <End Role="Tag" Type="Self.Tag" Multiplicity="1" />
+          <End Role="TagsChannels" Type="Self.TagsChannels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TagsChannels">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RSDB_ContextStoreContainer">
+          <EntitySet Name="Channel" EntityType="Self.Channel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Favourite" EntityType="Self.Favourite" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="History" EntityType="Self.History" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rating" EntityType="Self.Rating" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TagsChannels" EntityType="Self.TagsChannels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Favourite_Channels" Association="Self.FK_Favourite_Channels">
+            <End Role="Channel" EntitySet="Channel" />
+            <End Role="Favourite" EntitySet="Favourite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Favourite_Users" Association="Self.FK_Favourite_Users">
+            <End Role="User" EntitySet="User" />
+            <End Role="Favourite" EntitySet="Favourite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_History_Channels" Association="Self.FK_History_Channels">
+            <End Role="Channel" EntitySet="Channel" />
+            <End Role="History" EntitySet="History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_History_Users" Association="Self.FK_History_Users">
+            <End Role="User" EntitySet="User" />
+            <End Role="History" EntitySet="History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rating_Channels" Association="Self.FK_Rating_Channels">
+            <End Role="Channel" EntitySet="Channel" />
+            <End Role="Rating" EntitySet="Rating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rating_Users" Association="Self.FK_Rating_Users">
+            <End Role="User" EntitySet="User" />
+            <End Role="Rating" EntitySet="Rating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TagsChannels_Channels" Association="Self.FK_TagsChannels_Channels">
+            <End Role="Channel" EntitySet="Channel" />
+            <End Role="TagsChannels" EntitySet="TagsChannels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TagsChannels_Tags" Association="Self.FK_TagsChannels_Tags">
+            <End Role="Tag" EntitySet="Tag" />
+            <End Role="TagsChannels" EntitySet="TagsChannels" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RSDB_Context" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Channel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PageUrl" Type="Int64" Nullable="false" />
+          <Property Name="StreamUrl" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="TagsChannels" Relationship="Self.FK_TagsChannels_Channels" FromRole="Channel" ToRole="TagsChannels" />
+          <NavigationProperty Name="Favourite" Relationship="RSDB_Context.FK_Favourite_Channels" FromRole="Channel" ToRole="Favourite" />
+          <NavigationProperty Name="History" Relationship="RSDB_Context.FK_History_Channels" FromRole="Channel" ToRole="History" />
+          <NavigationProperty Name="Rating" Relationship="RSDB_Context.FK_Rating_Channels" FromRole="Channel" ToRole="Rating" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TagsChannels" Relationship="Self.FK_TagsChannels_Tags" FromRole="Tag" ToRole="TagsChannels" />
+        </EntityType>
+        <EntityType Name="TagsChannels">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TagId" Type="Int64" Nullable="false" />
+          <Property Name="ChannelId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Channel" Relationship="Self.FK_TagsChannels_Channels" FromRole="TagsChannels" ToRole="Channel" />
+          <NavigationProperty Name="Tag" Relationship="Self.FK_TagsChannels_Tags" FromRole="TagsChannels" ToRole="Tag" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Salt" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Favourite" Relationship="RSDB_Context.FK_Favourite_Users" FromRole="User" ToRole="Favourite" />
+          <NavigationProperty Name="History" Relationship="RSDB_Context.FK_History_Users" FromRole="User" ToRole="History" />
+          <NavigationProperty Name="Rating" Relationship="RSDB_Context.FK_Rating_Users" FromRole="User" ToRole="Rating" />
+        </EntityType>
+        <Association Name="FK_TagsChannels_Channels">
+          <End Role="Channel" Type="Self.Channel" Multiplicity="1" />
+          <End Role="TagsChannels" Type="Self.TagsChannels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Channel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TagsChannels">
+              <PropertyRef Name="ChannelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TagsChannels_Tags">
+          <End Role="Tag" Type="Self.Tag" Multiplicity="1" />
+          <End Role="TagsChannels" Type="Self.TagsChannels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TagsChannels">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RadioStreamerDB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Channel" EntityType="Self.Channel" />
+          <EntitySet Name="Tag" EntityType="Self.Tag" />
+          <EntitySet Name="TagsChannels" EntityType="Self.TagsChannels" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK_TagsChannels_Channels" Association="Self.FK_TagsChannels_Channels">
+            <End Role="Channel" EntitySet="Channel" />
+            <End Role="TagsChannels" EntitySet="TagsChannels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TagsChannels_Tags" Association="Self.FK_TagsChannels_Tags">
+            <End Role="Tag" EntitySet="Tag" />
+            <End Role="TagsChannels" EntitySet="TagsChannels" />
+          </AssociationSet>
+          <EntitySet Name="Favourite" EntityType="RSDB_Context.Favourite" />
+          <EntitySet Name="History" EntityType="RSDB_Context.History" />
+          <EntitySet Name="Rating" EntityType="RSDB_Context.Rating" />
+          <AssociationSet Name="FK_Favourite_Channels" Association="RSDB_Context.FK_Favourite_Channels">
+            <End Role="Channel" EntitySet="Channel" />
+            <End Role="Favourite" EntitySet="Favourite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_History_Channels" Association="RSDB_Context.FK_History_Channels">
+            <End Role="Channel" EntitySet="Channel" />
+            <End Role="History" EntitySet="History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rating_Channels" Association="RSDB_Context.FK_Rating_Channels">
+            <End Role="Channel" EntitySet="Channel" />
+            <End Role="Rating" EntitySet="Rating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Favourite_Users" Association="RSDB_Context.FK_Favourite_Users">
+            <End Role="User" EntitySet="User" />
+            <End Role="Favourite" EntitySet="Favourite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_History_Users" Association="RSDB_Context.FK_History_Users">
+            <End Role="User" EntitySet="User" />
+            <End Role="History" EntitySet="History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rating_Users" Association="RSDB_Context.FK_Rating_Users">
+            <End Role="User" EntitySet="User" />
+            <End Role="Rating" EntitySet="Rating" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Favourite">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int64" Nullable="false" />
+          <Property Name="ChannelId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Channel" Relationship="RSDB_Context.FK_Favourite_Channels" FromRole="Favourite" ToRole="Channel" />
+          <NavigationProperty Name="User" Relationship="RSDB_Context.FK_Favourite_Users" FromRole="Favourite" ToRole="User" />
+        </EntityType>
+        <EntityType Name="History">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int64" Nullable="false" />
+          <Property Name="ChannelId" Type="Int64" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Value" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Channel" Relationship="RSDB_Context.FK_History_Channels" FromRole="History" ToRole="Channel" />
+          <NavigationProperty Name="User" Relationship="RSDB_Context.FK_History_Users" FromRole="History" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int64" Nullable="false" />
+          <Property Name="ChannelId" Type="Int64" Nullable="false" />
+          <Property Name="Value" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Channel" Relationship="RSDB_Context.FK_Rating_Channels" FromRole="Rating" ToRole="Channel" />
+          <NavigationProperty Name="User" Relationship="RSDB_Context.FK_Rating_Users" FromRole="Rating" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Favourite_Channels">
+          <End Type="RSDB_Context.Channel" Role="Channel" Multiplicity="1" />
+          <End Type="RSDB_Context.Favourite" Role="Favourite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Channel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Favourite">
+              <PropertyRef Name="ChannelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_History_Channels">
+          <End Type="RSDB_Context.Channel" Role="Channel" Multiplicity="1" />
+          <End Type="RSDB_Context.History" Role="History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Channel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="History">
+              <PropertyRef Name="ChannelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rating_Channels">
+          <End Type="RSDB_Context.Channel" Role="Channel" Multiplicity="1" />
+          <End Type="RSDB_Context.Rating" Role="Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Channel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="ChannelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Favourite_Users">
+          <End Type="RSDB_Context.User" Role="User" Multiplicity="1" />
+          <End Type="RSDB_Context.Favourite" Role="Favourite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Favourite">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_History_Users">
+          <End Type="RSDB_Context.User" Role="User" Multiplicity="1" />
+          <End Type="RSDB_Context.History" Role="History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="History">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rating_Users">
+          <End Type="RSDB_Context.User" Role="User" Multiplicity="1" />
+          <End Type="RSDB_Context.Rating" Role="Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RSDB_ContextStoreContainer" CdmEntityContainer="RadioStreamerDB">
+          <EntitySetMapping Name="Channel">
+            <EntityTypeMapping TypeName="RSDB_Context.Channel">
+              <MappingFragment StoreEntitySet="Channel">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PageUrl" ColumnName="PageUrl" />
+                <ScalarProperty Name="StreamUrl" ColumnName="StreamUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tag">
+            <EntityTypeMapping TypeName="RSDB_Context.Tag">
+              <MappingFragment StoreEntitySet="Tag">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TagsChannels">
+            <EntityTypeMapping TypeName="RSDB_Context.TagsChannels">
+              <MappingFragment StoreEntitySet="TagsChannels">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
+                <ScalarProperty Name="ChannelId" ColumnName="ChannelId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="RSDB_Context.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Favourite">
+            <EntityTypeMapping TypeName="RSDB_Context.Favourite">
+              <MappingFragment StoreEntitySet="Favourite">
+                <ScalarProperty Name="ChannelId" ColumnName="ChannelId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="History">
+            <EntityTypeMapping TypeName="RSDB_Context.History">
+              <MappingFragment StoreEntitySet="History">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="ChannelId" ColumnName="ChannelId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rating">
+            <EntityTypeMapping TypeName="RSDB_Context.Rating">
+              <MappingFragment StoreEntitySet="Rating">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="ChannelId" ColumnName="ChannelId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

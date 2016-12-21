@@ -152,7 +152,6 @@
     <Content Include="Scripts\Player\jquery.jplayer.js" />
     <Content Include="Scripts\Player\jquery.jplayer.min.js" />
     <Content Include="Scripts\Player\jquery.jplayer.swf" />
-    <Content Include="Scripts\Player\login.js" />
     <Content Include="Scripts\Player\marquee.js" />
     <Content Include="Scripts\Player\set.player.js" />
     <Content Include="Scripts\Player\star-rating.js" />
