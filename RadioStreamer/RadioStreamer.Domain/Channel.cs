@@ -25,8 +25,8 @@ namespace RadioStreamer.Domain
     
         public long Id { get; set; }
         public string Name { get; set; }
-        public long PageUrl { get; set; }
-        public long StreamUrl { get; set; }
+        public string PageUrl { get; set; }
+        public string StreamUrl { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Favourite> Favourite { get; set; }

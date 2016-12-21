@@ -83,8 +83,8 @@ GO
 CREATE TABLE [dbo].[Channel](
 	[Id] [bigint] IDENTITY(1,1) NOT NULL,
 	[Name] [nvarchar](255) NOT NULL,
-	[PageUrl] [bigint] NOT NULL,
-	[StreamUrl] [bigint] NOT NULL,
+	[PageUrl] [nvarchar](255) NOT NULL,
+	[StreamUrl] [nvarchar](255) NOT NULL,
  CONSTRAINT [PK_dbo.Channel] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
