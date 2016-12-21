@@ -4,22 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d4e0542adb714a0c93d96dfa7bda521b" Name="Diagram1" ZoomLevel="86">
-        <EntityTypeShape EntityType="RSDB_Context.Channel" Width="1.5" PointX="8.875" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="RSDB_Context.Tag" Width="1.5" PointX="10.875" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="RSDB_Context.TagsChannels" Width="1.5" PointX="11" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RSDB_Context.User" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
-        <AssociationConnector Association="RSDB_Context.FK_TagsChannels_Channels" ManuallyRouted="false" />
-        <AssociationConnector Association="RSDB_Context.FK_TagsChannels_Tags" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="RSDB_Context.Favourite" Width="1.5" PointX="6.25" PointY="6.875" />
-        <EntityTypeShape EntityType="RSDB_Context.History" Width="1.5" PointX="6.125" PointY="3.75" />
-        <EntityTypeShape EntityType="RSDB_Context.Rating" Width="1.5" PointX="6.375" PointY="0.75" />
-        <AssociationConnector Association="RSDB_Context.FK_Favourite_Channels" />
-        <AssociationConnector Association="RSDB_Context.FK_History_Channels" />
-        <AssociationConnector Association="RSDB_Context.FK_Rating_Channels" />
-        <AssociationConnector Association="RSDB_Context.FK_Favourite_Users" />
-        <AssociationConnector Association="RSDB_Context.FK_History_Users" />
-        <AssociationConnector Association="RSDB_Context.FK_Rating_Users" />
+      <Diagram DiagramId="642c86f0f2674e65915a90dc78d6b15e" Name="Diagram1">
+        <EntityTypeShape EntityType="RadioStreamerDBModel.Channel" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RadioStreamerDBModel.Favourite" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RadioStreamerDBModel.History" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RadioStreamerDBModel.Rating" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RadioStreamerDBModel.Tag" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RadioStreamerDBModel.TagsChannels" Width="1.5" PointX="6" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RadioStreamerDBModel.User" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
+        <AssociationConnector Association="RadioStreamerDBModel.FK_Favourite_Channels" ManuallyRouted="false" />
+        <AssociationConnector Association="RadioStreamerDBModel.FK_History_Channels" ManuallyRouted="false" />
+        <AssociationConnector Association="RadioStreamerDBModel.FK_Rating_Channels" ManuallyRouted="false" />
+        <AssociationConnector Association="RadioStreamerDBModel.FK_TagsChannels_Channels" ManuallyRouted="false" />
+        <AssociationConnector Association="RadioStreamerDBModel.FK_Favourite_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="RadioStreamerDBModel.FK_History_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="RadioStreamerDBModel.FK_Rating_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="RadioStreamerDBModel.FK_TagsChannels_Tags" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

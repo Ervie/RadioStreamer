@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1A8828BE-E407-40A2-BD44-510E59D563DC}</ProjectGuid>
+    <ProjectGuid>{ADFA7575-7785-405A-ADFC-B3A89EB7CCB4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RadioStreamer.Domain</RootNamespace>
-    <AssemblyName>RadioStreamer.Domain</AssemblyName>
+    <RootNamespace>RadioStreamer.Services</RootNamespace>
+    <AssemblyName>RadioStreamer.Services</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -36,65 +36,11 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="RadioStreamerDB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>RadioStreamerDB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <None Include="packages.config" />
-    <None Include="RadioStreamerDB.edmx.diagram">
-      <DependentUpon>RadioStreamerDB.edmx</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="RadioStreamerDB.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RadioStreamerDB.edmx</DependentUpon>
-      <LastGenOutput>RadioStreamerDB.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="RadioStreamerDB.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RadioStreamerDB.edmx</DependentUpon>
-      <LastGenOutput>RadioStreamerDB.cs</LastGenOutput>
-    </Content>
-    <Content Include="Scripts\00_DatabaseCreation.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Channel.cs">
-      <DependentUpon>RadioStreamerDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Favourite.cs">
-      <DependentUpon>RadioStreamerDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="History.cs">
-      <DependentUpon>RadioStreamerDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RadioStreamerDB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RadioStreamerDB.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RadioStreamerDB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RadioStreamerDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RadioStreamerDB.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RadioStreamerDB.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Rating.cs">
-      <DependentUpon>RadioStreamerDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Tag.cs">
-      <DependentUpon>RadioStreamerDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TagsChannels.cs">
-      <DependentUpon>RadioStreamerDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="User.cs">
-      <DependentUpon>RadioStreamerDB.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Base\ContextRepository.cs" />
+    <Compile Include="ChannelService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -107,13 +53,16 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <ProjectReference Include="..\RadioStreamer.Common\RadioStreamer.Common.csproj">
+      <Project>{6ddd874f-6e6e-4fb7-b6d0-85e55fa1c404}</Project>
+      <Name>RadioStreamer.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RadioStreamer.Domain\RadioStreamer.Domain.csproj">
+      <Project>{1a8828be-e407-40a2-bd44-510e59d563dc}</Project>
+      <Name>RadioStreamer.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

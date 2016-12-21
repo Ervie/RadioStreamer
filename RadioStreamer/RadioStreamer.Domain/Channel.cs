@@ -17,10 +17,10 @@ namespace RadioStreamer.Domain
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Channel()
         {
-            this.TagsChannels = new HashSet<TagsChannels>();
             this.Favourite = new HashSet<Favourite>();
             this.History = new HashSet<History>();
             this.Rating = new HashSet<Rating>();
+            this.TagsChannels = new HashSet<TagsChannels>();
         }
     
         public long Id { get; set; }
@@ -29,12 +29,12 @@ namespace RadioStreamer.Domain
         public long StreamUrl { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TagsChannels> TagsChannels { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Favourite> Favourite { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<History> History { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Rating> Rating { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TagsChannels> TagsChannels { get; set; }
     }
 }

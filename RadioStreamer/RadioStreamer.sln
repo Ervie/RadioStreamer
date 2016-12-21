@@ -1,11 +1,24 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RadioStreamer.WebUI", "RadioStreamer.WebUI\RadioStreamer.WebUI.csproj", "{2F370752-059B-4866-9D06-FEB8F1887EEF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6DDD874F-6E6E-4FB7-B6D0-85E55FA1C404} = {6DDD874F-6E6E-4FB7-B6D0-85E55FA1C404}
+		{ADFA7575-7785-405A-ADFC-B3A89EB7CCB4} = {ADFA7575-7785-405A-ADFC-B3A89EB7CCB4}
+		{1A8828BE-E407-40A2-BD44-510E59D563DC} = {1A8828BE-E407-40A2-BD44-510E59D563DC}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RadioScreamer.Domain", "RadioScreamer.Domain\RadioScreamer.Domain.csproj", "{F70249B3-084F-47A4-8834-EA050852C473}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RadioStreamer.Common", "RadioStreamer.Common\RadioStreamer.Common.csproj", "{6DDD874F-6E6E-4FB7-B6D0-85E55FA1C404}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RadioStreamer.Domain", "RadioStreamer.Domain\RadioStreamer.Domain.csproj", "{1A8828BE-E407-40A2-BD44-510E59D563DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RadioStreamer.Services", "RadioStreamer.Services\RadioStreamer.Services.csproj", "{ADFA7575-7785-405A-ADFC-B3A89EB7CCB4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6DDD874F-6E6E-4FB7-B6D0-85E55FA1C404} = {6DDD874F-6E6E-4FB7-B6D0-85E55FA1C404}
+		{1A8828BE-E407-40A2-BD44-510E59D563DC} = {1A8828BE-E407-40A2-BD44-510E59D563DC}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +30,18 @@ Global
 		{2F370752-059B-4866-9D06-FEB8F1887EEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F370752-059B-4866-9D06-FEB8F1887EEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F370752-059B-4866-9D06-FEB8F1887EEF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F70249B3-084F-47A4-8834-EA050852C473}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F70249B3-084F-47A4-8834-EA050852C473}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F70249B3-084F-47A4-8834-EA050852C473}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F70249B3-084F-47A4-8834-EA050852C473}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DDD874F-6E6E-4FB7-B6D0-85E55FA1C404}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DDD874F-6E6E-4FB7-B6D0-85E55FA1C404}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DDD874F-6E6E-4FB7-B6D0-85E55FA1C404}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DDD874F-6E6E-4FB7-B6D0-85E55FA1C404}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A8828BE-E407-40A2-BD44-510E59D563DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A8828BE-E407-40A2-BD44-510E59D563DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A8828BE-E407-40A2-BD44-510E59D563DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A8828BE-E407-40A2-BD44-510E59D563DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADFA7575-7785-405A-ADFC-B3A89EB7CCB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADFA7575-7785-405A-ADFC-B3A89EB7CCB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADFA7575-7785-405A-ADFC-B3A89EB7CCB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADFA7575-7785-405A-ADFC-B3A89EB7CCB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

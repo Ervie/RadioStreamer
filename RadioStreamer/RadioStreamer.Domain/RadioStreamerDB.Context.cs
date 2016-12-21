@@ -13,10 +13,10 @@ namespace RadioStreamer.Domain
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class RadioStreamerDB : DbContext
+    public partial class RadioStreamerDBEntities : DbContext
     {
-        public RadioStreamerDB()
-            : base("name=RadioStreamerDB")
+        public RadioStreamerDBEntities()
+            : base("name=RadioStreamerDBEntities")
         {
         }
     
@@ -26,11 +26,11 @@ namespace RadioStreamer.Domain
         }
     
         public virtual DbSet<Channel> Channel { get; set; }
-        public virtual DbSet<Tag> Tag { get; set; }
-        public virtual DbSet<TagsChannels> TagsChannels { get; set; }
-        public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Favourite> Favourite { get; set; }
         public virtual DbSet<History> History { get; set; }
         public virtual DbSet<Rating> Rating { get; set; }
+        public virtual DbSet<Tag> Tag { get; set; }
+        public virtual DbSet<TagsChannels> TagsChannels { get; set; }
+        public virtual DbSet<User> User { get; set; }
     }
 }
