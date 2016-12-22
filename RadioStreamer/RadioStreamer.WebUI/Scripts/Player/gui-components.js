@@ -1,5 +1,5 @@
 ﻿
-// Odświezanie polecanek meta co minutę
+// Odświezanie polecanek  co minutę
 $(document).ready(function () {
     // pierwszy raz od razu przy wczytaniu
     refreshSuggestions()

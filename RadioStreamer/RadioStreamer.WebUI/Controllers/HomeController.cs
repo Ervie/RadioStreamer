@@ -9,6 +9,7 @@ using RadioStreamer.Domain;
 using RadioStreamer.Services;
 using RadioStreamer.Common.Exceptions;
 using RadioStreamer.Common.Structs;
+using RadioStreamer.Common.Utils;
 
 namespace RadioStreamer.WebUI.Controllers
 {
@@ -78,6 +79,26 @@ namespace RadioStreamer.WebUI.Controllers
 						return Json(string.Empty);
 
 
+				}
+			}
+		}
+
+		public ActionResult Metadata()
+		{
+			if (Request.QueryString["currentChannelUrl"] == null)
+				throw new InvalidAjaxRequestException();
+			else
+			{
+				using (ChannelService db = new ChannelService())
+				{
+					string channelUrl = Request.QueryString["currentChannelUrl"];
+
+					if (!string.IsNullOrWhiteSpace(channelUrl))
+					{
+						var metadata = MetadataWorker.SendRequest(channelUrl);
+						ViewBag.Metadata = metadata;
+					}
+					return PartialView("~/Views/Shared/metadataPartial.cshtml");
 				}
 			}
 		}

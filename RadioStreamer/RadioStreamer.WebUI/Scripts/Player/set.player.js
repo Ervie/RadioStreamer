@@ -160,15 +160,15 @@ $(document).ready(function () {
 });
 
 // Wczytywanie meta co 3 sekund
-$(document).ready(function () {
+$(document).ready(function (){ 
 
-    setInterval(refreshMeta, 3000)
+	setInterval(refreshMeta, 3000);
 
 });
 
 function refreshMeta() {
     $.ajax({
-        url: 'metadata',
+        url: 'Home/Metadata',
         type: "GET",
         data: {
             'currentChannelUrl': currentChannelUrl,
