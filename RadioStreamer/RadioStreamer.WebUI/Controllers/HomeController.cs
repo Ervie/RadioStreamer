@@ -103,6 +103,30 @@ namespace RadioStreamer.WebUI.Controllers
 			}
 		}
 
+		public JsonResult GetRandomChannel()
+		{
+				using (ChannelService db = new ChannelService())
+				{
+					Channel returnedChannel = db.GetRandomChannel();
+
+					if (returnedChannel != null)
+					{
+						string imgSrc = "Images/Icons/300px/" + returnedChannel.Name + ".png";
+						ChannelInfo channelInfo = new ChannelInfo()
+						{
+							Name = returnedChannel.Name,
+							StreamUrl = returnedChannel.StreamUrl,
+							ImagePath = imgSrc
+						};
+						return Json(channelInfo, JsonRequestBehavior.AllowGet);
+					}
+					else
+						return Json(string.Empty);
+						
+				}
+			
+		}
+
 		#endregion
 	}
 }

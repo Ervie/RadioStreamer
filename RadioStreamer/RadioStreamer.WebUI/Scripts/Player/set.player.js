@@ -64,24 +64,24 @@ $(document).ready(function () {
 	$("#ChangeChannelBtn").click(function () {
 
 	    $.ajax({
-	        url: 'randomChannel',
+	        url: 'Home/GetRandomChannel',
 	        type: "GET",
 	        success: function (data, textStatus, jqXHR){
 
 
 	            var stream = {
-	                title: data.channelName,
-	                mp3: data.channelUrl
+	            	title: data.Name,
+	            	mp3: data.StreamUrl
 	            };
 
-	            imgSrc = data.imagePath;
+	            imgSrc = data.ImagePath;
 
 	            $('#jquery_jplayer_1').jPlayer('setMedia', stream);
 	            $("#currentChannelLogo").attr('src', imgSrc);
 
 	            logListeningTime();
-	            currentChannelName = data.channelName;
-	            currentChannelUrl = data.channelUrl;
+	            currentChannelName = data.Name;
+	            currentChannelUrl = data.StreamUrl;
 
 	            loadAdditionalInfo();
 	        }
