@@ -41,7 +41,7 @@ $(document).ready(function () {
         keyEnabled: true
     });
 
-    $("#currentChannelLogo").attr('src', "static/app/image/icons/300px/placeholder.png");
+    $("#currentChannelLogo").attr('src', "Images/Icons/300px/placeholder.png");
 
     startDate = new Date();
     currentChannelUrl = ""
@@ -52,7 +52,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     $("#MediaResetBtn").click(function () {
         $('#jquery_jplayer_1').jPlayer('clearMedia');
-        $("#currentChannelLogo").attr('src', "static/app/image/icons/300px/placeholder.png");
+        $("#currentChannelLogo").attr('src', "Images/Icons/300px/placeholder.png");
         logListeningTime();
         currentChannelUrl = ""
         currentChannelName = ""
@@ -142,7 +142,7 @@ $(document).ready(function () {
 				};
 
 				$('#jquery_jplayer_1').jPlayer('setMedia', stream);
-				$("#currentChannelLogo").attr('src', "static/app/image/icons/300px/placeholder.png");
+				$("#currentChannelLogo").attr('src', "Images/Icons/300px/placeholder.png");
 
 				currentChannelName = data.channelName;
 				currentChannelUrl = data.channelUrl;

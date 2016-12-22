@@ -17,7 +17,7 @@
 
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/Player/jplayer.pink.flag.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Player/jplayer.pink.flag.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/Player/star-rating.css" rel="stylesheet" type="text/css" />
     
     
@@ -42,16 +42,17 @@
                 </button>
                 <a href="/"><img border="0" class="myNavbarElement" alt="Radio Streamer" src="~/Images/waterStream.png" width="48" height="48" /></a>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav"></ul>
+            <div class="navbar-collapse collapse customNavbar">
+				<ul class="nav navbar-nav navbar-left">
+					<li>@Html.ActionLink("O aplikacji", "About", "Home", new { area = "" }, new { @class = "myNavbarElement site-text nav-item" })</li>
+				</ul>
             </div>
         </div>
 
     <div class="container body-content">
         @RenderBody()
-        <hr />
         <footer class="footer">
-            <p>&copy; @DateTime.Now.Year - Radio Streamer - Bartłomiej Buchała</p>
+            <p class="site-text">&copy; @DateTime.Now.Year - Radio Streamer - Bartłomiej Buchała</p>
         </footer>
     </div>
 
