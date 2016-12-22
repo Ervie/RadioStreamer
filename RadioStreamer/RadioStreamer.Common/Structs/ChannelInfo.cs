@@ -9,6 +9,7 @@ namespace RadioStreamer.Common.Structs
 	public struct ChannelInfo
 	{
 		public string Name { get; set; }
+
 		public string StreamUrl { get; set; }
 
 		public string ImagePath { get; set; }

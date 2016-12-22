@@ -1,11 +1,8 @@
 ﻿// zmienne do przetrzymywania informacji o polecankach
-var firstImagePath;
 var firstChannelName;
 var firstChannelUrl;
-var secondImagePath;
 var secondChannelName;
 var secondChannelUrl;
-var thirdImagePath;
 var thirdChannelName;
 var thirdChannelUrl;
 
@@ -13,18 +10,40 @@ var thirdChannelUrl;
 // Odświezanie polecanek  co minutę
 $(document).ready(function () {
     // pierwszy raz od razu przy wczytaniu
-    refreshSuggestions()
+    refreshSidebar()
 
-    setInterval(refreshSuggestions, 60000)
+    setInterval(refreshSidebar, 60000)
 });
 
-function refreshSuggestions() {
+function refreshSidebar() {
     $.ajax({
-        url: 'Home/Sidebar',
+        url: 'Home/GetSuggestions',
         success: function (data) {
             $('#sidebar').html(data);
+        },
+        success: function (data, textStatus, jqXHR) {
+            firstChannelName = data.FirstChannelName;
+            firstChannelUrl = data.FirstChannelUrl;
+            secondChannelName = data.SecondChannelName;
+            secondChannelUrl = data.SecondChannelUrl;
+            thirdChannelName = data.ThirdChannelName;
+            thirdChannelUrl = data.ThirdChannelUrl;
+
+            $.ajax({
+                url: 'Home/Sidebar',
+                type: "GET",
+                data: {
+                    'firstChannelName': firstChannelName,
+                    'secondChannelName': secondChannelName,
+                    'thirdChannelName' : thirdChannelName,
+                    'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()
+                },
+                success: function (data) {
+                    $('#sidebar').html(data);
+                }
+            })
         }
-    })
+    });
 };
 
 // Pierwsza sugestia
@@ -35,7 +54,7 @@ $(document).ready(function () {
 			mp3: firstChannelUrl
 	}
 
-        imgSrc = firstImagePath;
+		imgSrc = "Images/Icons/300px/" + firstChannelName + ".png";
 
         $('#jquery_jplayer_1').jPlayer('setMedia', stream);
         $("#currentChannelLogo").attr('src', imgSrc);
@@ -56,7 +75,7 @@ $(document).ready(function () {
             mp3: secondChannelUrl
         }
 
-        imgSrc = secondImagePath
+        imgSrc = "Images/Icons/300px/" + secondChannelName + ".png";
 
         $('#jquery_jplayer_1').jPlayer('setMedia', stream);
         $("#currentChannelLogo").attr('src', imgSrc);
@@ -77,7 +96,7 @@ $(document).ready(function () {
             mp3: thirdChannelUrl
         }
 
-        imgSrc = thirdImagePath;
+        imgSrc = "Images/Icons/300px/" + thirdChannelName + ".png";
 
         $('#jquery_jplayer_1').jPlayer('setMedia', stream);
         $("#currentChannelLogo").attr('src', imgSrc);

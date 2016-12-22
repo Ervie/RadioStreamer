@@ -100,13 +100,31 @@ namespace RadioStreamer.WebUI.Controllers
 			}
 		}
 
+        public JsonResult GetSuggestions()
+        {
+            using (ChannelService db = new ChannelService())
+			{
+
+                Suggestions suggestions = new Suggestions()
+						{
+							FirstChannelName = "RMF FM Classic",
+                            FirstChannelUrl = "http://195.150.20.243:8000/rmf_classic",
+                            SecondChannelName = "Gensokyo Radio",
+                            SecondChannelUrl = "http://stream.gensokyoradio.net:8000/stream/1/",
+                            ThirdChannelName = "VGM Radio",
+                            ThirdChannelUrl = "http://radio.vgmradio.com:8040/stream"
+						};
+
+				return Json(suggestions, JsonRequestBehavior.AllowGet);
+            }
+        }
+
 		#endregion Ajax requests
 
 		#region Partial Rendering
 
 		public ActionResult Metadata()
 		{
-		
 			string channelUrl = Request.QueryString["currentChannelUrl"];
 
 			if (!string.IsNullOrWhiteSpace(channelUrl))
@@ -115,30 +133,17 @@ namespace RadioStreamer.WebUI.Controllers
 				ViewBag.Metadata = metadata;
 			}
 			return PartialView("~/Views/Shared/metadataPartial.cshtml");
-				
 		}
 
 		public ActionResult Sidebar()
 		{
-			using (ChannelService db = new ChannelService())
-			{
-				ViewBag.firstImagePath = "Images/Icons/300px/RMF FM Classic.png";
-				ViewBag.firstImagePathSmall = "Images/Icons/120px/RMF FM Classic120.png";
-				ViewBag.firstChannelName = "RMF FM Classic";
-				ViewBag.firstChannelUrl = "http://195.150.20.243:8000/rmf_classic";
-                ViewBag.secondImagePath = "IImages/Icons/300px/Gensokyo Radio.png";
-				ViewBag.secondImagePathSmall = "Images/Icons/120px/Gensokyo Radio120.png";
-				ViewBag.secondChannelName = "Gensokyo Radio";
-				ViewBag.secondChannelUrl = "http://stream.gensokyoradio.net:8000/stream/1/";
-				ViewBag.thirdImagePath = "Images/Icons/300px/VGM Radio.png";
-				ViewBag.thirdImagePathSmall = "Images/Icons/120px/VGM Radio120.png";
-				ViewBag.thirdChannelName = "VGM Radio";
-				ViewBag.thirdChannelUrl = "http://radio.vgmradio.com:8040/stream";
-				
-				return PartialView("~/Views/Shared/sidebarPartial.cshtml");
-			}
-			
-		}
+
+            ViewBag.firstImagePathSmall = "Images/Icons/120px/" + Request.QueryString["firstChannelName"] + "120.png";
+            ViewBag.secondImagePathSmall = "Images/Icons/120px/" + Request.QueryString["secondChannelName"] + "120.png";
+            ViewBag.thirdImagePathSmall = "Images/Icons/120px/" + Request.QueryString["thirdChannelName"] + "120.png";
+
+			return PartialView("~/Views/Shared/sidebarPartial.cshtml");	
+        }
 
 		#endregion Partial Rendering
 	}
