@@ -1,0 +1,36 @@
+﻿
+<aside id="sidebar">
+
+	<div class="suggestions">
+
+		<!--Czit -> przypisywanie wartości z ViewBag, aby jQuery mogło sobie je pobrać-->
+
+		<script type="text/javascript">
+			firstImagePath = '@ViewBag.firstImagePath';
+			firstChannelName = @ViewBag.firstChannelName
+			firstChannelUrl = @ViewBag.firstChannelUrl
+
+			secondImagePath = @ViewBag.secondImagePath
+			secondChannelName = @ViewBag.secondChannelName
+			secondChannelUrl = @ViewBag.secondChannelUrl
+
+			thirdImagePath = @ViewBag.thirdImagePath
+			thirdChannelName = @ViewBag.thirdChannelName
+			thirdChannelUrl = @ViewBag.thirdChannelUrl
+		</script>
+
+		<div class="site-text"><h4>Polecane dla Ciebie:</h4></div>
+
+		<div class="suggestion ">
+			<img id="firstSuggestion" class="suggestionImage" src="@ViewBag.firstImagePathSmall" />
+		</div>
+
+		<div class="suggestion ">
+			<img id="secondSuggestion" class="suggestionImage" src="@ViewBag.secondImagePathSmall" />
+		</div>
+
+		<div class="suggestion ">
+			<img id="thirdSuggestion" class="suggestionImage" src="@ViewBag.thirdImagePathSmall" />
+		</div>
+	</div>
+</aside>

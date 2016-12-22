@@ -264,6 +264,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Shared\channelsPartial.cshtml" />
     <Content Include="Views\Shared\metadataPartial.cshtml" />
+    <Content Include="Views\Shared\sidebarPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,4 +1,15 @@
-﻿
+﻿// zmienne do przetrzymywania informacji o polecankach
+var firstImagePath;
+var firstChannelName;
+var firstChannelUrl;
+var secondImagePath;
+var secondChannelName;
+var secondChannelUrl;
+var thirdImagePath;
+var thirdChannelName;
+var thirdChannelUrl;
+
+
 // Odświezanie polecanek  co minutę
 $(document).ready(function () {
     // pierwszy raz od razu przy wczytaniu
@@ -9,7 +20,7 @@ $(document).ready(function () {
 
 function refreshSuggestions() {
     $.ajax({
-        url: 'sidebar',
+        url: 'Home/Sidebar',
         success: function (data) {
             $('#sidebar').html(data);
         }
@@ -18,20 +29,20 @@ function refreshSuggestions() {
 
 // Pierwsza sugestia
 $(document).ready(function () {
-    $('body').on('click', '#firstSuggestion', function () {
-        var stream = {
-            title: $('body').data('firstChannelName'),
-            mp3: $('body').data('firstChannelUrl')
-        }
+	$('body').on('click', '#firstSuggestion', function () {
+		var stream = {
+			title: firstChannelName,
+			mp3: firstChannelUrl
+	}
 
-        imgSrc = $('body').data('firstImagePath')
+        imgSrc = firstImagePath;
 
         $('#jquery_jplayer_1').jPlayer('setMedia', stream);
         $("#currentChannelLogo").attr('src', imgSrc);
 
         logListeningTime();
-        currentChannelUrl = $('body').data('firstChannelUrl');
-        currentChannelName = $('body').data('firstChannelName');
+        currentChannelUrl = firstChannelUrl;
+        currentChannelName = firstChannelName;
 
         loadAdditionalInfo();
     });
@@ -41,18 +52,18 @@ $(document).ready(function () {
 $(document).ready(function () {
     $("body").on('click', '#secondSuggestion', function () {
         var stream = {
-            title: $('body').data('secondChannelName'),
-            mp3: $('body').data('secondChannelUrl')
+            title: secondChannelName,
+            mp3: secondChannelUrl
         }
 
-        imgSrc = $('body').data('secondImagePath')
+        imgSrc = secondImagePath
 
         $('#jquery_jplayer_1').jPlayer('setMedia', stream);
         $("#currentChannelLogo").attr('src', imgSrc);
 
         logListeningTime();
-        currentChannelUrl = $('body').data('secondChannelUrl');
-        currentChannelName = $('body').data('secondChannelName');
+        currentChannelUrl = secondChannelUrl;
+        currentChannelName = secondChannelName;
 
         loadAdditionalInfo();
     });
@@ -62,18 +73,18 @@ $(document).ready(function () {
 $(document).ready(function () {
     $("body").on('click', '#thirdSuggestion', function () {
         var stream = {
-            title: $('body').data('thirdChannelName'),
-            mp3: $('body').data('thirdChannelUrl')
+            title: thirdChannelName,
+            mp3: thirdChannelUrl
         }
 
-        imgSrc = $('body').data('thirdImagePath')
+        imgSrc = thirdImagePath;
 
         $('#jquery_jplayer_1').jPlayer('setMedia', stream);
         $("#currentChannelLogo").attr('src', imgSrc);
 
         logListeningTime();
-        currentChannelUrl = $('body').data('thirdChannelUrl');
-        currentChannelName = $('body').data('thirdChannelName');
+        currentChannelUrl = thirdChannelUrl;
+        currentChannelName = thirdChannelName;
 
         loadAdditionalInfo();
     });
