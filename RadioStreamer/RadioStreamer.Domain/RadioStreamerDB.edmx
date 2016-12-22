@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="RadioStreamerDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="RadioStreamerDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Channel">
           <Key>
             <PropertyRef Name="Id" />
@@ -31,7 +31,7 @@
           <Property Name="ChannelId" Type="bigint" Nullable="false" />
           <Property Name="StartDate" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="EndDate" Type="datetime2" Precision="7" Nullable="false" />
-          <Property Name="Value" Type="int" Nullable="false" />
+          <Property Name="Duration" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Rating">
           <Key>
@@ -204,8 +204,7 @@
             <End Role="TagsChannels" EntitySet="TagsChannels" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RadioStreamerDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -241,9 +240,9 @@
           <Property Name="ChannelId" Type="Int64" Nullable="false" />
           <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="Value" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Channel" Relationship="Self.FK_History_Channels" FromRole="History" ToRole="Channel" />
           <NavigationProperty Name="User" Relationship="Self.FK_History_Users" FromRole="History" ToRole="User" />
+          <Property Name="Duration" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Rating">
           <Key>
@@ -452,12 +451,12 @@
           <EntitySetMapping Name="History">
             <EntityTypeMapping TypeName="RadioStreamerDBModel.History">
               <MappingFragment StoreEntitySet="History">
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="ChannelId" ColumnName="ChannelId" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

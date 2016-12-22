@@ -187,16 +187,13 @@ function logListeningTime() {
 	startDateISO = startDate.toISOString();
 
 	$.ajax({
-		url: 'logTime',
+		url: 'Home/LogTime',
 		type: "POST",
 		data: {
 			'currentChannelName': currentChannelName,
 			'startTimestamp': startDateISO,
 			'endTimestamp': endDateISO,
 			'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()
-		},
-		success: function (data) {
-			$('#jp-meta').html(data);
 		}
 	})
 }

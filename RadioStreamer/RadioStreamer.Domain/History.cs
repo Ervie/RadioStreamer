@@ -19,7 +19,7 @@ namespace RadioStreamer.Domain
         public long ChannelId { get; set; }
         public System.DateTime StartDate { get; set; }
         public System.DateTime EndDate { get; set; }
-        public int Value { get; set; }
+        public int Duration { get; set; }
     
         public virtual Channel Channel { get; set; }
         public virtual User User { get; set; }

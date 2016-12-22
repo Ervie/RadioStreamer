@@ -22,14 +22,14 @@ namespace RadioStreamer.Services.Base
 
         protected void SaveChanges()
         {
-            //if (context != null)
-            //    context.SaveChanges();
+            if (context != null)
+                context.SaveChanges();
         }
 
         public void Dispose()
         {
-            //if (context != null)
-            //    context.Dispose();
+            if (context != null)
+                context.Dispose();
         }
 
         /// <summary>

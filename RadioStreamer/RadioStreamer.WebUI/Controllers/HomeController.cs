@@ -3,8 +3,10 @@ using RadioStreamer.Common.Structs;
 using RadioStreamer.Common.Utils;
 using RadioStreamer.Domain;
 using RadioStreamer.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 
@@ -145,6 +147,29 @@ namespace RadioStreamer.WebUI.Controllers
 			return PartialView("~/Views/Shared/sidebarPartial.cshtml");	
         }
 
+        
+
 		#endregion Partial Rendering
-	}
+
+        #region Other
+
+        public ContentResult LogTime()
+        {
+            if (!string.IsNullOrEmpty(Request.Form["currentChannelName"]))
+            {
+                using (HistoryService db = new HistoryService())
+                {
+                    string channelName = Request.Form["currentChannelName"];
+                    DateTime start = DateTime.Parse(Request.Form["startTimestamp"], null, System.Globalization.DateTimeStyles.RoundtripKind);
+                    DateTime end = DateTime.Parse(Request.Form["endTimestamp"], null, System.Globalization.DateTimeStyles.RoundtripKind);
+
+                    db.AddHistoryLog(channelName, "Forczu", start, end);
+                }
+            }
+
+            return Content("");
+        }
+
+        #endregion
+    }
 }
