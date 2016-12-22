@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\DBConnectionException.cs" />
+    <Compile Include="Exceptions\InvalidAjaxRequestException.cs" />
+    <Compile Include="Structs\ChannelInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

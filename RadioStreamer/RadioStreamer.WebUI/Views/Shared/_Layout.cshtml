@@ -45,6 +45,7 @@
             <div class="navbar-collapse collapse customNavbar">
 				<ul class="nav navbar-nav navbar-left">
 					<li>@Html.ActionLink("O aplikacji", "About", "Home", new { area = "" }, new { @class = "myNavbarElement site-text nav-item" })</li>
+					@Html.Partial("~/Views/Shared/channelsPartial.cshtml")
 				</ul>
             </div>
         </div>

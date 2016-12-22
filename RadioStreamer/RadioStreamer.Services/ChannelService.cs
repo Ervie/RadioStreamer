@@ -9,11 +9,16 @@ using RadioStreamer.Domain;
 
 namespace RadioStreamer.Services
 {
-    class ChannelService : ContextRepository
+    public class ChannelService : ContextRepository
     {
         public Channel GetChannelByName(string channelName)
         {
             return context.Channel.FirstOrDefault(x => x.Name.Equals(channelName));
         }
+
+		public List<Channel> GetAllChannels()
+		{
+			return context.Channel.ToList();
+		}
     }
 }

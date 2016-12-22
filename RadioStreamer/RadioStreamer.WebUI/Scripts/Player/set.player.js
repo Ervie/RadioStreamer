@@ -94,7 +94,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     $("#station-list").on("click", ".channelRef", function () {
         $.ajax({
-            url: 'requestedChannel',
+        	url: 'Home/GetChannel',
             type: "GET",
             data: {
                 'channelName': event.target.id,
@@ -103,18 +103,18 @@ $(document).ready(function () {
             success: function (data, textStatus, jqXHR) {
 
                 var stream = {
-                    title: data.channelName,
-                    mp3: data.channelUrl
+                	title: data.Name,
+                	mp3: data.StreamUrl
                 };
 
-                imgSrc = data.imagePath;
+                imgSrc = data.ImagePath;
 
                 $('#jquery_jplayer_1').jPlayer('setMedia', stream);
                 $("#currentChannelLogo").attr('src', imgSrc);
 
                 logListeningTime();
-                currentChannelName = data.channelName;
-                currentChannelUrl = data.channelUrl;
+                currentChannelName = data.Name;
+                currentChannelUrl = data.StreamUrl;
 
                 startDate = new Date();
                 loadAdditionalInfo();
@@ -124,41 +124,12 @@ $(document).ready(function () {
     });
 });
 
-// Wybrana prywatna stacja z drugiego dropdown
-$(document).ready(function () {
-	$("#station-list").on("click", ".privateChannelRef", function () {
-		$.ajax({
-			url: 'requestedPrivateChannel',
-			type: "GET",
-			data: {
-				'channelName': event.target.id,
-				'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()
-			},
-			success: function (data, textStatus, jqXHR) {
-
-				var stream = {
-					title: data.channelName,
-					mp3: data.channelUrl
-				};
-
-				$('#jquery_jplayer_1').jPlayer('setMedia', stream);
-				$("#currentChannelLogo").attr('src', "Images/Icons/300px/placeholder.png");
-
-				currentChannelName = data.channelName;
-				currentChannelUrl = data.channelUrl;
-
-				startDate = new Date();
-			}
-		})
-
-	});
-});
 
 // Stacja wybrana z ulubionych
 $(document).ready(function () {
 	$("#favorite-list").on("click", ".channelRef", function () {
 		$.ajax({
-			url: 'requestedChannel',
+			url: 'Home/GetChannel',
 			type: "GET",
 			data: {
 				'channelName': event.target.id,
@@ -167,18 +138,18 @@ $(document).ready(function () {
 			success: function (data, textStatus, jqXHR) {
 
 				var stream = {
-					title: data.channelName,
-					mp3: data.channelUrl
+					title: data.Name,
+					mp3: data.StreamUrl
 				};
 
-				imgSrc = data.imagePath;
+				imgSrc = data.ImagePath;
 
 				$('#jquery_jplayer_1').jPlayer('setMedia', stream);
 				$("#currentChannelLogo").attr('src', imgSrc);
 
 				logListeningTime();
-				currentChannelName = data.channelName;
-				currentChannelUrl = data.channelUrl;
+				currentChannelName = data.Name;
+				currentChannelUrl = data.StreamUrl;
 
 				startDate = new Date();
 				loadAdditionalInfo();

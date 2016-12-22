@@ -139,29 +139,15 @@ function loadAdditionalInfo() {
 $(document).on('ready', function () {
 	// Wszystkie
 	$.ajax({
-		url: 'channelList',
+		url: 'Home/GetChannelList',
 		type: "GET",
 		success: function (data, textStatus, jqXHR) {
+			var parsedData = $.parseJSON(data);
 			i = 0;
 			$.each(
-                data,
+                parsedData,
                 function (i) {
-                	$("#station-list").append("<li><a class='channelRef' id='" + data[i] + "'>" + data[i] + "</a></li>");
-                }
-            );
-
-		}
-	})
-	// Prywatne
-	$.ajax({
-		url: 'privateChannelList',
-		type: "GET",
-		success: function (data, textStatus, jqXHR) {
-			i = 0;
-			$.each(
-                data,
-                function (i) {
-                	$("#private-station-list").append("<li><a class='privateChannelRef' id='" + data[i] + "'>" + data[i] + "</a></li>");
+                	$("#station-list").append("<li><a class='channelRef' id='" + parsedData[i] + "'>" + parsedData[i] + "</a></li>");
                 }
             );
 
@@ -171,12 +157,13 @@ $(document).on('ready', function () {
 	$.ajax({
 		url: 'favoriteList',
 		success: function (data, textStatus, jqXHR) {
+			var parsedData = $.parseJSON(data);
 		    $("#favorite-list").append("<li><a href='#' class='active'>Ulubione stacje</a></li>");
 			i = 0;
 			$.each(
-				data,
+				parsedData,
 				function (i) {
-				    $("#favorite-list").append("<li><a class='channelRef site-text fav-channel' id='" + data[i] + "'>" + data[i] + "</a></li>");
+					$("#favorite-list").append("<li><a class='channelRef site-text fav-channel' id='" + parsedData[i] + "'>" + parsedData[i] + "</a></li>");
 				}
 			)}
 		});
