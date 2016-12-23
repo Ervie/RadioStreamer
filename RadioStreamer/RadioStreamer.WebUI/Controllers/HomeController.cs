@@ -186,6 +186,44 @@ namespace RadioStreamer.WebUI.Controllers
                 return Content("");
         }
 
+        public ActionResult GetFavouriteList()
+        {
+            List<Favourite> returnedFavorites;
+
+            using (FavRatingService db = new FavRatingService())
+            {
+                if (Request.HttpMethod == "POST")
+                {
+                    if (Request.Form["currentChannelName"] != null)
+                    {
+                        if (Request.Form["operation"] == "Add")
+                        {
+                            db.AddFavorite("Forczu", Request.Form["currentChannelName"]);
+                        }
+                        else if (Request.Form["operation"] == "Delete")
+                        {
+                            db.DeleteFavourite("Forczu", Request.Form["currentChannelName"]);
+                        }
+                    }
+                }
+
+                returnedFavorites = db.GetAllFavourites("Forczu");
+                
+
+                if (returnedFavorites != null)
+                {
+                    List<string> channelNames = returnedFavorites.Select(x => x.Channel.Name).ToList();
+                    channelNames.Sort();
+                    string output = new JavaScriptSerializer().Serialize(channelNames);
+                    return Json(output, JsonRequestBehavior.AllowGet);
+                }
+                else
+                    return Json(string.Empty);
+
+            }
+
+        }
+
 		#endregion Partial Rendering
 
         #region Other

@@ -185,7 +185,7 @@ $(document).on('ready', function () {
 	})
 	//Ulubione
 	$.ajax({
-		url: 'favoriteList',
+	    url: 'Home/GetFavouriteList',
 		success: function (data, textStatus, jqXHR) {
 			var parsedData = $.parseJSON(data);
 		    $("#favorite-list").append("<li><a href='#' class='active'>Ulubione stacje</a></li>");
@@ -206,7 +206,7 @@ $(document).on('ready', function () {
         if (document.getElementById('squaredOne').checked)
         {
             $.ajax({
-                url: 'favoriteList',
+                url: 'Home/GetFavouriteList',
                 type: "POST",
                 data: {
                     'currentChannelName': currentChannelName,
@@ -214,13 +214,14 @@ $(document).on('ready', function () {
                     'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()
                 },
                 success: function (data, textStatus, jqXHR) {
+                    var parsedData = $.parseJSON(data);
                     $("#favorite-list").empty();
                     $("#favorite-list").append("<li><a href='#' class='active'>Ulubione stacje</a></li>");
                     i = 0;
                     $.each(
-                        data,
+                        parsedData,
                         function (i) {
-                            $("#favorite-list").append("<li class='fav-channel'><a class='channelRef site-text' id='" + data[i] + "'>" + data[i] + "</a></li>");
+                            $("#favorite-list").append("<li class='fav-channel'><a class='channelRef site-text' id='" + parsedData[i] + "'>" + parsedData[i] + "</a></li>");
                         }
                     )}
             })
@@ -228,7 +229,7 @@ $(document).on('ready', function () {
         else
         {
             $.ajax({
-                url: 'favoriteList',
+                url: 'Home/GetFavouriteList',
                 type: "POST",
                 data: {
                     'currentChannelName': currentChannelName,
@@ -236,13 +237,14 @@ $(document).on('ready', function () {
                     'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()
                 },
                 success: function (data, textStatus, jqXHR) {
+                    var parsedData = $.parseJSON(data);
                     $("#favorite-list").empty();
                     $("#favorite-list").append("<li><a href='#' class='active'>Ulubione stacje</a></li>");
                     i = 0;
                     $.each(
-                        data,
+                        parsedData,
                         function (i) {
-                            $("#favorite-list").append("<li class='fav-channel'><a class='channelRef site-text' id='" + data[i] + "'>" + data[i] + "</a></li>");
+                            $("#favorite-list").append("<li class='fav-channel'><a class='channelRef site-text' id='" + parsedData[i] + "'>" + parsedData[i] + "</a></li>");
                         }
                     )
                 }
