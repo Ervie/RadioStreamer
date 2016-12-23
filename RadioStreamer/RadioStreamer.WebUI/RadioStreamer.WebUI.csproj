@@ -265,6 +265,7 @@
     <Content Include="Views\Shared\channelsPartial.cshtml" />
     <Content Include="Views\Shared\metadataPartial.cshtml" />
     <Content Include="Views\Shared\sidebarPartial.cshtml" />
+    <Content Include="Views\Shared\ratingPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

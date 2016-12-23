@@ -123,7 +123,7 @@ $(document).on('ready', function () {
         if (currentChannelName != "") {
 
             $.ajax({
-                url: 'additionalInfo',
+                url: 'Home/AdditionalInfo',
                 type: "POST",
                 data: {
                     'currentChannelName': currentChannelName,
@@ -136,7 +136,7 @@ $(document).on('ready', function () {
         if (currentChannelName != "") {
 
             $.ajax({
-                url: 'additionalInfo',
+                url: 'Home/AdditionalInfo',
                 type: "POST",
                 data: {
                     'currentChannelName': currentChannelName,
@@ -148,19 +148,19 @@ $(document).on('ready', function () {
     });
 });
 
-// Wczytanie ratingu
+// Wczytanie ratingu i wartości checkboxa
 function loadAdditionalInfo() {
 
     $.ajax({
-        url: 'additionalInfo',
+        url: 'Home/AdditionalInfo',
         type: "GET",
         data: {
             'currentChannelName': currentChannelName,
             'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()
         },
         success: function (data, textStatus, jqXHR) {
-            $("#userStarRating").rating("update", data.value);
-            $("#squaredOne").prop('checked', data.isFavorite);
+            $("#userStarRating").rating("update", data.Value);
+            $("#squaredOne").prop('checked', data.IsFavorite);
         }
     })
 };

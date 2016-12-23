@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Base\ContextRepository.cs" />
     <Compile Include="ChannelService.cs" />
+    <Compile Include="FavRatingService.cs" />
     <Compile Include="HistoryService.cs" />
   </ItemGroup>
   <ItemGroup>

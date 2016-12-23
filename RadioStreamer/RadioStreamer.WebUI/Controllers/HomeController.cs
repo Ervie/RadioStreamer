@@ -5,6 +5,7 @@ using RadioStreamer.Domain;
 using RadioStreamer.Services;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -147,7 +148,43 @@ namespace RadioStreamer.WebUI.Controllers
 			return PartialView("~/Views/Shared/sidebarPartial.cshtml");	
         }
 
-        
+        public ActionResult AdditionalInfo()
+        {
+            if (Request.HttpMethod == "POST")
+            {
+                if (!string.IsNullOrEmpty(Request.Form["currentChannelName"]))
+                {
+                    double adjustedRating = double.Parse(Request.Form["value"], CultureInfo.InvariantCulture) * 2;
+
+                    using (FavRatingService db = new FavRatingService())
+                    {
+                        db.SetRating("Forczu", Request.Form["currentChannelName"], (int)adjustedRating);
+                    }
+
+                    return Content("");
+                }
+                else
+                    throw new InvalidAjaxRequestException();
+            }
+            else if (Request.HttpMethod == "GET")
+            {
+                using (FavRatingService db = new FavRatingService())
+                {
+                    Rating requestedRating = db.GetRating("Forczu", Request.QueryString["currentChannelName"]);
+                    bool isFavorite = db.IsFavorite("Forczu", Request.QueryString["currentChannelName"]);
+
+                    AdditionalInfo info = new AdditionalInfo()
+                    {
+                        IsFavorite = isFavorite,
+                        Value = (requestedRating != null) ? requestedRating.Value / 2.0 : 0.0
+                    };
+
+                    return Json(info, JsonRequestBehavior.AllowGet);
+                }
+            }
+            else
+                return Content("");
+        }
 
 		#endregion Partial Rendering
 
