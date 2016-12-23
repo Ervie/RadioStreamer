@@ -13,6 +13,7 @@ using System.Web.Script.Serialization;
 
 namespace RadioStreamer.WebUI.Controllers
 {
+    [Authorize]
 	public class HomeController : Controller
 	{
 		#region Main Views
