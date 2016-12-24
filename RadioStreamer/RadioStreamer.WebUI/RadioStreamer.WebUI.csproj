@@ -269,6 +269,8 @@
     <Content Include="Views\Shared\ratingPartial.cshtml" />
     <Content Include="Views\Shared\favoritePartial.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Shared\loginPartial.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

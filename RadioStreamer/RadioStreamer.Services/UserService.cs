@@ -1,5 +1,6 @@
 ﻿using RadioStreamer.Domain;
 using RadioStreamer.Services.Base;
+using RadioStreamer.Common.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,18 +13,37 @@ namespace RadioStreamer.Services
     {
         public void RegisterUser(User user)
         {
+            string salt = Encryption.generateSalt();
+            string hashedPassword = Encryption.HashPassword(user.Password, salt);
+
+            user.Password = hashedPassword;
+            user.Salt = salt;
+
             context.User.Add(user);
             SaveChanges();
         }
 
         public User LogInUser(User user)
         {
-            return context.User.Where(u => u.Login == user.Login && u.Password == user.Password).FirstOrDefault();        
+            User matchingUsernname = context.User.Where(u => u.Login.Equals(user.Login)).FirstOrDefault();
+
+            string userSalt = matchingUsernname.Salt;
+
+            if (userSalt != null)
+            {
+                string hashedPassword = Encryption.HashPassword(user.Password, userSalt);
+
+                if (matchingUsernname.Password.Equals(hashedPassword))
+                    return matchingUsernname;
+            }
+
+            return null;
+   
         }
 
-        public bool CheckIfUserExistByLogin(string userName)
+        public bool IsOccupied(string userName, string email)
         {
-            return !context.User.Any(x => x.Login == userName);
+            return context.User.Any(x => x.Login == userName || x.Email == email);
         }
     }
     

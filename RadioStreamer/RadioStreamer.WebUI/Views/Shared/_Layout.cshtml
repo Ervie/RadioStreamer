@@ -48,13 +48,14 @@
                     @if (User.Identity.IsAuthenticated)
                     {
 					    @Html.Partial("~/Views/Shared/channelsPartial.cshtml")
-                        <li>@Html.ActionLink("Wyloguj", "LogOut", "Account", new { area = "" }, new { @class = "navbar-brand nav navbar-nav navbar-right" })</li>
                     }
-				</ul>
+				</ul>                
+                @Html.Partial("~/Views/Shared/loginPartial.cshtml")
             </div>
         </div>
 
     <div class="">
+        <br />
         @RenderBody()
         <footer class="footer">
             <hr />

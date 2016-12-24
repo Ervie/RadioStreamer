@@ -21,9 +21,13 @@ namespace RadioStreamer.WebUI.Controllers
 		// GET: Home
 		public ActionResult Index()
 		{
-			return View();
+            if (Session["Username"] == null)
+                return RedirectToAction("Login", "Account");
+            else
+			    return View();
 		}
 
+        [AllowAnonymous]
 		public ActionResult About()
 		{
 			return View();
@@ -151,6 +155,8 @@ namespace RadioStreamer.WebUI.Controllers
 
         public ActionResult AdditionalInfo()
         {
+            string currentUser = Session["Username"].ToString();
+
             if (Request.HttpMethod == "POST")
             {
                 if (!string.IsNullOrEmpty(Request.Form["currentChannelName"]))
@@ -159,7 +165,7 @@ namespace RadioStreamer.WebUI.Controllers
 
                     using (FavRatingService db = new FavRatingService())
                     {
-                        db.SetRating("Forczu", Request.Form["currentChannelName"], (int)adjustedRating);
+                        db.SetRating(currentUser, Request.Form["currentChannelName"], (int)adjustedRating);
                     }
 
                     return Content("");
@@ -171,8 +177,8 @@ namespace RadioStreamer.WebUI.Controllers
             {
                 using (FavRatingService db = new FavRatingService())
                 {
-                    Rating requestedRating = db.GetRating("Forczu", Request.QueryString["currentChannelName"]);
-                    bool isFavorite = db.IsFavorite("Forczu", Request.QueryString["currentChannelName"]);
+                    Rating requestedRating = db.GetRating(currentUser, Request.QueryString["currentChannelName"]);
+                    bool isFavorite = db.IsFavorite(currentUser, Request.QueryString["currentChannelName"]);
 
                     AdditionalInfo info = new AdditionalInfo()
                     {
@@ -190,6 +196,7 @@ namespace RadioStreamer.WebUI.Controllers
         public ActionResult GetFavouriteList()
         {
             List<Favourite> returnedFavorites;
+            string currentUser = Session["Username"].ToString();
 
             using (FavRatingService db = new FavRatingService())
             {
@@ -199,16 +206,16 @@ namespace RadioStreamer.WebUI.Controllers
                     {
                         if (Request.Form["operation"] == "Add")
                         {
-                            db.AddFavorite("Forczu", Request.Form["currentChannelName"]);
+                            db.AddFavorite(currentUser, Request.Form["currentChannelName"]);
                         }
                         else if (Request.Form["operation"] == "Delete")
                         {
-                            db.DeleteFavourite("Forczu", Request.Form["currentChannelName"]);
+                            db.DeleteFavourite(currentUser, Request.Form["currentChannelName"]);
                         }
                     }
                 }
 
-                returnedFavorites = db.GetAllFavourites("Forczu");
+                returnedFavorites = db.GetAllFavourites(currentUser);
                 
 
                 if (returnedFavorites != null)
@@ -239,7 +246,7 @@ namespace RadioStreamer.WebUI.Controllers
                     DateTime start = DateTime.Parse(Request.Form["startTimestamp"], null, System.Globalization.DateTimeStyles.RoundtripKind);
                     DateTime end = DateTime.Parse(Request.Form["endTimestamp"], null, System.Globalization.DateTimeStyles.RoundtripKind);
 
-                    db.AddHistoryLog(channelName, "Forczu", start, end);
+                    db.AddHistoryLog(channelName, Session["Username"].ToString(), start, end);
                 }
             }
 

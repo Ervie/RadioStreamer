@@ -26,18 +26,18 @@ namespace RadioStreamer.Domain
         public long Id { get; set; }
 
         [Required(ErrorMessage = "Login in required")]
-        [MaxLength(32, ErrorMessage = "You can only add up to 32 characters")]
+        [MaxLength(255, ErrorMessage = "You can only add up to 255 characters")]
         public string Login { get; set; }
 
         [Required(ErrorMessage = "Password in required")]
-        [MaxLength(32, ErrorMessage = "You can only add up to 32 characters")]
+        [MaxLength(255, ErrorMessage = "You can only add up to 255 characters")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
         public string Salt { get; set; }
 
         [Required(ErrorMessage = "Email in required")]
-        [MaxLength(64, ErrorMessage = "You can only add up to 64 characters")]
+        [MaxLength(255, ErrorMessage = "You can only add up to 255 characters")]
         [EmailAddress(ErrorMessage = "We don't recognize it as valid email address")]
         public string Email { get; set; }
     

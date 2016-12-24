@@ -21,6 +21,8 @@ namespace RadioStreamer.WebUI.Controllers
         [AllowAnonymous]
         public ActionResult Login()
         {
+            Session["UserId"] = string.Empty;
+            Session["Username"] = string.Empty;
             return View();
         }
 
@@ -58,6 +60,40 @@ namespace RadioStreamer.WebUI.Controllers
             FormsAuthentication.SignOut();
 
             return RedirectToAction("Login", "Account");
+        }
+
+        [AllowAnonymous]
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult Register(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                using (UserService db = new UserService())
+                {
+                    if (!db.IsOccupied(user.Login, user.Email))
+                    {
+                        db.RegisterUser(user);
+                        ViewBag.Message = user.Login + " succesfully registered.";
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Occupied", "Login or e-mail is already taken.");
+                        ViewBag.Message = "Login or e-mail is already taken.";
+                    }
+
+                }
+                ModelState.Clear();
+
+                
+            }
+
+            return View();
         }
     }
 }

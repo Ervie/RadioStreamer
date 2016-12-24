@@ -44,6 +44,7 @@
     <Compile Include="Structs\AdditionalInfo.cs" />
     <Compile Include="Structs\ChannelInfo.cs" />
     <Compile Include="Structs\Suggestions.cs" />
+    <Compile Include="Utils\Encryption.cs" />
     <Compile Include="Utils\MetadataWorker.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -167,90 +167,93 @@ function loadAdditionalInfo() {
 
 // Wczytanie listy stacji
 $(document).on('ready', function () {
-	// Wszystkie
-	$.ajax({
-		url: 'Home/GetChannelList',
-		type: "GET",
-		success: function (data, textStatus, jqXHR) {
-			var parsedData = $.parseJSON(data);
-			i = 0;
-			$.each(
-                parsedData,
-                function (i) {
-                	$("#station-list").append("<li><a class='channelRef' id='" + parsedData[i] + "'>" + parsedData[i] + "</a></li>");
-                }
-            );
+    if (window.location == "Home/Index") {
+        // Wszystkie
+        $.ajax({
+            url: 'Home/GetChannelList',
+            type: "GET",
+            success: function (data, textStatus, jqXHR) {
+                var parsedData = $.parseJSON(data);
+                i = 0;
+                $.each(
+                    parsedData,
+                    function (i) {
+                        $("#station-list").append("<li><a class='channelRef' id='" + parsedData[i] + "'>" + parsedData[i] + "</a></li>");
+                    }
+                );
 
-		}
-	})
-	//Ulubione
-	$.ajax({
-	    url: 'Home/GetFavouriteList',
-		success: function (data, textStatus, jqXHR) {
-			var parsedData = $.parseJSON(data);
-		    $("#favorite-list").append("<li><a href='#' class='active'>Ulubione stacje</a></li>");
-			i = 0;
-			$.each(
-				parsedData,
-				function (i) {
-					$("#favorite-list").append("<li><a class='channelRef site-text fav-channel' id='" + parsedData[i] + "'>" + parsedData[i] + "</a></li>");
-				}
-			)}
-		});
+            }
+        })
+        //Ulubione
+        $.ajax({
+            url: 'Home/GetFavouriteList',
+            success: function (data, textStatus, jqXHR) {
+                var parsedData = $.parseJSON(data);
+                $("#favorite-list").append("<li><a href='#' class='active'>Ulubione stacje</a></li>");
+                i = 0;
+                $.each(
+                    parsedData,
+                    function (i) {
+                        $("#favorite-list").append("<li><a class='channelRef site-text fav-channel' id='" + parsedData[i] + "'>" + parsedData[i] + "</a></li>");
+                    }
+                )
+            }
+        });
+    }
 });
 
 // Przedładowywanie stacji ulubionych przy zmianie stanu checkboxa
 $(document).on('ready', function () {
-    $('#squaredOne').change(function () {
+    if (window.location == "Home/Index") {
+        $('#squaredOne').change(function () {
 
-        if (document.getElementById('squaredOne').checked)
-        {
-            $.ajax({
-                url: 'Home/GetFavouriteList',
-                type: "POST",
-                data: {
-                    'currentChannelName': currentChannelName,
-                    'operation': "Add",
-                    'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()
-                },
-                success: function (data, textStatus, jqXHR) {
-                    var parsedData = $.parseJSON(data);
-                    $("#favorite-list").empty();
-                    $("#favorite-list").append("<li><a href='#' class='active'>Ulubione stacje</a></li>");
-                    i = 0;
-                    $.each(
-                        parsedData,
-                        function (i) {
-                            $("#favorite-list").append("<li class='fav-channel'><a class='channelRef site-text' id='" + parsedData[i] + "'>" + parsedData[i] + "</a></li>");
-                        }
-                    )}
-            })
-        }
-        else
-        {
-            $.ajax({
-                url: 'Home/GetFavouriteList',
-                type: "POST",
-                data: {
-                    'currentChannelName': currentChannelName,
-                    'operation': "Delete",
-                    'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()
-                },
-                success: function (data, textStatus, jqXHR) {
-                    var parsedData = $.parseJSON(data);
-                    $("#favorite-list").empty();
-                    $("#favorite-list").append("<li><a href='#' class='active'>Ulubione stacje</a></li>");
-                    i = 0;
-                    $.each(
-                        parsedData,
-                        function (i) {
-                            $("#favorite-list").append("<li class='fav-channel'><a class='channelRef site-text' id='" + parsedData[i] + "'>" + parsedData[i] + "</a></li>");
-                        }
-                    )
-                }
-            })
-        }
+            if (document.getElementById('squaredOne').checked) {
+                $.ajax({
+                    url: 'Home/GetFavouriteList',
+                    type: "POST",
+                    data: {
+                        'currentChannelName': currentChannelName,
+                        'operation': "Add",
+                        'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                        var parsedData = $.parseJSON(data);
+                        $("#favorite-list").empty();
+                        $("#favorite-list").append("<li><a href='#' class='active'>Ulubione stacje</a></li>");
+                        i = 0;
+                        $.each(
+                            parsedData,
+                            function (i) {
+                                $("#favorite-list").append("<li class='fav-channel'><a class='channelRef site-text' id='" + parsedData[i] + "'>" + parsedData[i] + "</a></li>");
+                            }
+                        )
+                    }
+                })
+            }
+            else {
+                $.ajax({
+                    url: 'Home/GetFavouriteList',
+                    type: "POST",
+                    data: {
+                        'currentChannelName': currentChannelName,
+                        'operation': "Delete",
+                        'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                        var parsedData = $.parseJSON(data);
+                        $("#favorite-list").empty();
+                        $("#favorite-list").append("<li><a href='#' class='active'>Ulubione stacje</a></li>");
+                        i = 0;
+                        $.each(
+                            parsedData,
+                            function (i) {
+                                $("#favorite-list").append("<li class='fav-channel'><a class='channelRef site-text' id='" + parsedData[i] + "'>" + parsedData[i] + "</a></li>");
+                            }
+                        )
+                    }
+                })
+            }
 
-    });
-
+        });
+    }
 });

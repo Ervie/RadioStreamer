@@ -118,7 +118,7 @@ namespace RadioStreamer.Services
             User user = context.User.FirstOrDefault(x => x.Login.Equals(userName));
 
             if (user != null)
-                return context.Favourite.ToList();
+                return context.Favourite.Where(x => x.UserId.Equals(user.Id)).ToList();
             else
                 return null;
         }
