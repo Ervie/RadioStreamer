@@ -166,8 +166,8 @@ function loadAdditionalInfo() {
 };
 
 // Wczytanie listy stacji
-$(document).on('ready', function () {
-    if (window.location == "Home/Index") {
+$(document).on('ready', function ()
+{
         // Wszystkie
         $.ajax({
             url: 'Home/GetChannelList',
@@ -199,12 +199,10 @@ $(document).on('ready', function () {
                 )
             }
         });
-    }
 });
 
 // Przedładowywanie stacji ulubionych przy zmianie stanu checkboxa
 $(document).on('ready', function () {
-    if (window.location == "Home/Index") {
         $('#squaredOne').change(function () {
 
             if (document.getElementById('squaredOne').checked) {
@@ -255,5 +253,4 @@ $(document).on('ready', function () {
             }
 
         });
-    }
 });
