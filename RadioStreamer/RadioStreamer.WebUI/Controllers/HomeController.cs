@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using System.Web.Security;
 
 namespace RadioStreamer.WebUI.Controllers
 {
@@ -22,9 +23,12 @@ namespace RadioStreamer.WebUI.Controllers
 		public ActionResult Index()
 		{
             if (Session["Username"] == null)
+            {
+                FormsAuthentication.SignOut();
                 return RedirectToAction("Login", "Account");
+            }
             else
-			    return View();
+                return View();
 		}
 
         [AllowAnonymous]
