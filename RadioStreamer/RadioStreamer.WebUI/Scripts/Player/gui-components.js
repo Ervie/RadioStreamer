@@ -63,6 +63,7 @@ $(document).ready(function () {
         currentChannelUrl = firstChannelUrl;
         currentChannelName = firstChannelName;
 
+        startDate = new Date();
         loadAdditionalInfo();
     });
 });
@@ -84,6 +85,7 @@ $(document).ready(function () {
         currentChannelUrl = secondChannelUrl;
         currentChannelName = secondChannelName;
 
+        startDate = new Date();
         loadAdditionalInfo();
     });
 });
@@ -105,6 +107,7 @@ $(document).ready(function () {
         currentChannelUrl = thirdChannelUrl;
         currentChannelName = thirdChannelName;
 
+        startDate = new Date();
         loadAdditionalInfo();
     });
 });

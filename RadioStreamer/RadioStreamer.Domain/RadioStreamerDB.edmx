@@ -163,6 +163,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="CalculateRecommendation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userName" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="RadioStreamerDBModelStoreContainer">
           <EntitySet Name="Channel" EntityType="Self.Channel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Favourite" EntityType="Self.Favourite" Schema="dbo" store:Type="Tables" />
@@ -422,7 +425,24 @@
             <End Role="Tag" EntitySet="Tag" />
             <End Role="TagsChannels" EntitySet="TagsChannels" />
           </AssociationSet>
+          <FunctionImport Name="CalculateRecommendation" ReturnType="Collection(RadioStreamerDBModel.CalculateRecommendation_Result)">
+          <Parameter Name="userName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CalculateRecommendation1" ReturnType="Collection(RadioStreamerDBModel.CalculateRecommendation1_Result)">
+            <Parameter Name="userName" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="CalculateRecommendation_Result">
+          <Property Type="Int64" Name="ChannelId" Nullable="true" />
+          <Property Type="String" Name="ChannelName" Nullable="true" MaxLength="255" />
+          <Property Type="Double" Name="Value" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="CalculateRecommendation1_Result">
+          <Property Type="Int64" Name="ChannelId" Nullable="true" />
+          <Property Type="String" Name="ChannelName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="StreamUrl" Nullable="true" MaxLength="255" />
+          <Property Type="Double" Name="Value" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -498,6 +518,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CalculateRecommendation1" FunctionName="RadioStreamerDBModel.Store.CalculateRecommendation">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RadioStreamerDBModel.CalculateRecommendation1_Result">
+                <ScalarProperty Name="ChannelId" ColumnName="ChannelId" />
+                <ScalarProperty Name="ChannelName" ColumnName="ChannelName" />
+                <ScalarProperty Name="StreamUrl" ColumnName="StreamUrl" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

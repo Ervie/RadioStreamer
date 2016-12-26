@@ -58,6 +58,7 @@
     </Content>
     <Content Include="Scripts\00_DatabaseCreation.sql" />
     <Content Include="Scripts\01_DataInserts.sql" />
+    <Content Include="Scripts\02_RecommendationProcedure.sql" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -79,6 +80,12 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalculateRecommendation1_Result.cs">
+      <DependentUpon>RadioStreamerDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CalculateRecommendation_Result.cs">
+      <DependentUpon>RadioStreamerDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Channel.cs">
       <DependentUpon>RadioStreamerDB.tt</DependentUpon>
     </Compile>

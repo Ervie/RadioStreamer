@@ -23,5 +23,10 @@ namespace RadioStreamer.Services
 			// Random record
 			return context.Channel.OrderBy(x => Guid.NewGuid()).FirstOrDefault();
 		}
+
+        public List<CalculateRecommendation1_Result> GetRecommendations(string userName)
+        {
+            return context.CalculateRecommendation1(userName).ToList();
+        }
 	}
 }

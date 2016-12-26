@@ -12,6 +12,8 @@ namespace RadioStreamer.Domain
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class RadioStreamerDBEntities : DbContext
     {
@@ -32,5 +34,23 @@ namespace RadioStreamer.Domain
         public virtual DbSet<Tag> Tag { get; set; }
         public virtual DbSet<TagsChannels> TagsChannels { get; set; }
         public virtual DbSet<User> User { get; set; }
+    
+        public virtual ObjectResult<CalculateRecommendation_Result> CalculateRecommendation(string userName)
+        {
+            var userNameParameter = userName != null ?
+                new ObjectParameter("userName", userName) :
+                new ObjectParameter("userName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CalculateRecommendation_Result>("CalculateRecommendation", userNameParameter);
+        }
+    
+        public virtual ObjectResult<CalculateRecommendation1_Result> CalculateRecommendation1(string userName)
+        {
+            var userNameParameter = userName != null ?
+                new ObjectParameter("userName", userName) :
+                new ObjectParameter("userName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CalculateRecommendation1_Result>("CalculateRecommendation1", userNameParameter);
+        }
     }
 }

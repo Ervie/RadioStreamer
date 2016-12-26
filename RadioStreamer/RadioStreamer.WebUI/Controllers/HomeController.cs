@@ -116,15 +116,17 @@ namespace RadioStreamer.WebUI.Controllers
         {
             using (ChannelService db = new ChannelService())
 			{
+                var suggestionResults = db.GetRecommendations(Session["Username"].ToString());
+
 
                 Suggestions suggestions = new Suggestions()
 						{
-							FirstChannelName = "RMF FM Classic",
-                            FirstChannelUrl = "http://195.150.20.243:8000/rmf_classic",
-                            SecondChannelName = "Gensokyo Radio",
-                            SecondChannelUrl = "http://stream.gensokyoradio.net:8000/stream/1/",
-                            ThirdChannelName = "VGM Radio",
-                            ThirdChannelUrl = "http://radio.vgmradio.com:8040/stream"
+							FirstChannelName = suggestionResults[0].ChannelName,
+                            FirstChannelUrl = suggestionResults[0].StreamUrl,
+                            SecondChannelName = suggestionResults[1].ChannelName,
+                            SecondChannelUrl = suggestionResults[1].StreamUrl,
+                            ThirdChannelName = suggestionResults[2].ChannelName,
+                            ThirdChannelUrl = suggestionResults[2].StreamUrl
 						};
 
 				return Json(suggestions, JsonRequestBehavior.AllowGet);
