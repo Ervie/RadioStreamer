@@ -28,11 +28,11 @@ BEGIN
 	
 	/* Get all channels ever listened by user */
 	insert into @ChannelsByDuration (ChannelId, ChannelName, TotalDuration)
-	SELECT chn.Id, chn.Name, SUM(his.Duration) as 'TotalDuration'
+	SELECT chn.Id, chn.Name, SUM(his.Value) as 'TotalDuration'
 	FROM [dbo].History his, [dbo].Channel chn
 	WHERE his.UserId = @UserId AND his.ChannelId = chn.Id
 	GROUP BY chn.Id, chn.Name
-	ORDER BY SUM(his.Duration) desc
+	ORDER BY SUM(his.Value) desc
 	
 	/* Load all tags into temporary table */
 	
