@@ -17,6 +17,12 @@ select,
 textarea {
     max-width: 280px;
 }
+/*Set scrollable dropdown menu*/ 
+.scrollable-bootstrap-menu { 
+  height: auto; 
+  max-height: 300px; 
+  overflow-x: hidden; 
+} 
 
 /* styles for validation helpers */
 .field-validation-error {
@@ -81,9 +87,13 @@ footer {
 
 #sidebar {
     float: right;
+    position: absolute; 
+    right: 0px; 
+    height: 400px; 
     width: 200px;
     top: 50%;
-    text-align:center;
+    margin-top: -230px; 
+    text-align: center; 
 }
 
 .suggestions {
@@ -129,6 +139,7 @@ ul.sidenav {
     background-color: rgba(58, 42, 69, 1);
     position: fixed;
     height: 50%;
+    top:25%; 
     overflow: auto;
 }
 
