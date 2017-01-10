@@ -119,7 +119,7 @@ CREATE TABLE [dbo].[History](
 	[ChannelId] [bigint] NOT NULL,
 	[StartDate] [datetime2](7) NOT NULL,
 	[EndDate] [datetime2](7) NOT NULL,
-	[Value] [int] NOT NULL,
+	[Duration] [int] NOT NULL,
  CONSTRAINT [PK_dbo.History] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

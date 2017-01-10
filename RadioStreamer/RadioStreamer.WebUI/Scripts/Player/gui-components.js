@@ -49,66 +49,72 @@ function refreshSidebar() {
 // Pierwsza sugestia
 $(document).ready(function () {
 	$('body').on('click', '#firstSuggestion', function () {
-		var stream = {
-			title: firstChannelName,
-			mp3: firstChannelUrl
-	}
+		if (currentChannelName != firstChannelName) {
+			var stream = {
+				title: firstChannelName,
+				mp3: firstChannelUrl
+			}
 
-		imgSrc = "Images/Icons/300px/" + firstChannelName + ".png";
+			imgSrc = "Images/Icons/300px/" + firstChannelName + ".png";
 
-        $('#jquery_jplayer_1').jPlayer('setMedia', stream);
-        $("#currentChannelLogo").attr('src', imgSrc);
+			$('#jquery_jplayer_1').jPlayer('setMedia', stream);
+			$("#currentChannelLogo").attr('src', imgSrc);
 
-        logListeningTime();
-        currentChannelUrl = firstChannelUrl;
-        currentChannelName = firstChannelName;
+			logListeningTime();
+			currentChannelUrl = firstChannelUrl;
+			currentChannelName = firstChannelName;
 
-        startDate = new Date();
-        loadAdditionalInfo();
+			startDate = new Date();
+			loadAdditionalInfo();
+		}
     });
 });
 
 // Druga sugestia
 $(document).ready(function () {
-    $("body").on('click', '#secondSuggestion', function () {
-        var stream = {
-            title: secondChannelName,
-            mp3: secondChannelUrl
-        }
+	$("body").on('click', '#secondSuggestion', function () {
+		if (currentChannelName != secondChannelName) {
+			var stream = {
+				title: secondChannelName,
+				mp3: secondChannelUrl
+			}
 
-        imgSrc = "Images/Icons/300px/" + secondChannelName + ".png";
+			imgSrc = "Images/Icons/300px/" + secondChannelName + ".png";
 
-        $('#jquery_jplayer_1').jPlayer('setMedia', stream);
-        $("#currentChannelLogo").attr('src', imgSrc);
+			$('#jquery_jplayer_1').jPlayer('setMedia', stream);
+			$("#currentChannelLogo").attr('src', imgSrc);
 
-        logListeningTime();
-        currentChannelUrl = secondChannelUrl;
-        currentChannelName = secondChannelName;
+			logListeningTime();
+			currentChannelUrl = secondChannelUrl;
+			currentChannelName = secondChannelName;
 
-        startDate = new Date();
-        loadAdditionalInfo();
+			startDate = new Date();
+			loadAdditionalInfo();
+		}
     });
 });
 
 // Trzecia sugestia
 $(document).ready(function () {
-    $("body").on('click', '#thirdSuggestion', function () {
-        var stream = {
-            title: thirdChannelName,
-            mp3: thirdChannelUrl
-        }
+	$("body").on('click', '#thirdSuggestion', function () {
+		if (currentChannelName != thirdChannelName) {
+			var stream = {
+				title: thirdChannelName,
+				mp3: thirdChannelUrl
+			}
 
-        imgSrc = "Images/Icons/300px/" + thirdChannelName + ".png";
+			imgSrc = "Images/Icons/300px/" + thirdChannelName + ".png";
 
-        $('#jquery_jplayer_1').jPlayer('setMedia', stream);
-        $("#currentChannelLogo").attr('src', imgSrc);
+			$('#jquery_jplayer_1').jPlayer('setMedia', stream);
+			$("#currentChannelLogo").attr('src', imgSrc);
 
-        logListeningTime();
-        currentChannelUrl = thirdChannelUrl;
-        currentChannelName = thirdChannelName;
+			logListeningTime();
+			currentChannelUrl = thirdChannelUrl;
+			currentChannelName = thirdChannelName;
 
-        startDate = new Date();
-        loadAdditionalInfo();
+			startDate = new Date();
+			loadAdditionalInfo();
+		}
     });
 });
 

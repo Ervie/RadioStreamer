@@ -15,6 +15,7 @@ namespace RadioStreamer.Domain
     {
         public Nullable<long> ChannelId { get; set; }
         public string ChannelName { get; set; }
+        public string StreamUrl { get; set; }
         public Nullable<double> Value { get; set; }
     }
 }

@@ -9,11 +9,11 @@
 
 namespace RadioStreamer.Domain
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    
-    public partial class User
+	using System;
+	using System.Collections.Generic;
+	using System.ComponentModel.DataAnnotations;
+
+	public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
@@ -25,21 +25,20 @@ namespace RadioStreamer.Domain
     
         public long Id { get; set; }
 
-        [Required(ErrorMessage = "Login in required")]
-        [MaxLength(255, ErrorMessage = "You can only add up to 255 characters")]
-        public string Login { get; set; }
+		[Required(ErrorMessage = "Login in required")]
+		[MaxLength(255, ErrorMessage = "You can only add up to 255 characters")]
+		public string Login { get; set; }
 
-        [Required(ErrorMessage = "Password in required")]
-        [MaxLength(255, ErrorMessage = "You can only add up to 255 characters")]
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
-
+		[Required(ErrorMessage = "Password in required")]
+		[MaxLength(255, ErrorMessage = "You can only add up to 255 characters")]
+		[DataType(DataType.Password)]
+		public string Password { get; set; }
         public string Salt { get; set; }
 
-        [Required(ErrorMessage = "Email in required")]
-        [MaxLength(255, ErrorMessage = "You can only add up to 255 characters")]
-        [EmailAddress(ErrorMessage = "We don't recognize it as valid email address")]
-        public string Email { get; set; }
+		[Required(ErrorMessage = "Email in required")]
+		[MaxLength(255, ErrorMessage = "You can only add up to 255 characters")]
+		[EmailAddress(ErrorMessage = "We don't recognize it as valid email address")]
+		public string Email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Favourite> Favourite { get; set; }

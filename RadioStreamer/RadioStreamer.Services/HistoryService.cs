@@ -25,7 +25,7 @@ namespace RadioStreamer.Services
                     ChannelId = channel.Id,
                     StartDate = startDate,
                     EndDate = endDate,
-                    Duration = duration
+					Duration = duration
                 };
 
                 context.History.Add(newObject);

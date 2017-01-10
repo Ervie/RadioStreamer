@@ -15,10 +15,10 @@ namespace RadioStreamer.Domain
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class RadioStreamerDBEntities : DbContext
+    public partial class RadioStreamerDBEntities1 : DbContext
     {
-        public RadioStreamerDBEntities()
-            : base("name=RadioStreamerDBEntities")
+        public RadioStreamerDBEntities1()
+            : base("name=RadioStreamerDBEntities1")
         {
         }
     
@@ -42,15 +42,6 @@ namespace RadioStreamer.Domain
                 new ObjectParameter("userName", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CalculateRecommendation_Result>("CalculateRecommendation", userNameParameter);
-        }
-    
-        public virtual ObjectResult<CalculateRecommendation1_Result> CalculateRecommendation1(string userName)
-        {
-            var userNameParameter = userName != null ?
-                new ObjectParameter("userName", userName) :
-                new ObjectParameter("userName", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CalculateRecommendation1_Result>("CalculateRecommendation1", userNameParameter);
         }
     }
 }

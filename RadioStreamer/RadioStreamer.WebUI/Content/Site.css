@@ -64,7 +64,7 @@ input[type="checkbox"].input-validation-error {
 
 .myNavbarElement {
 	margin: 5px 5px 5px 5px;
-	
+	cursor: pointer;
 }
 
 .myNavbarBtn {
@@ -83,13 +83,17 @@ footer {
 	color: #ffffff
 }
 
+.channelRef {
+	cursor: pointer;
+}
+
 /***************Sidebar z propozycjami*********************/
 
 #sidebar {
     float: right;
-    position: absolute; 
+    position: fixed; 
     right: 0px; 
-    height: 400px; 
+    height: 50%; 
     width: 200px;
     top: 50%;
     margin-top: -230px; 
@@ -105,6 +109,7 @@ footer {
     opacity: 1;
 	-webkit-transition: .3s ease-in-out;
 	transition: .3s ease-in-out;
+	cursor: pointer;
 }
 
 .suggestion:hover {

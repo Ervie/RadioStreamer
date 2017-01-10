@@ -11,7 +11,7 @@ namespace RadioStreamer.Services.Base
 {
     abstract public class ContextRepository : IDisposable
     {
-        protected RadioStreamerDBEntities context = new RadioStreamerDBEntities();
+        protected RadioStreamerDBEntities1 context = new RadioStreamerDBEntities1();
 
         private bool alreadyReconnected;
 

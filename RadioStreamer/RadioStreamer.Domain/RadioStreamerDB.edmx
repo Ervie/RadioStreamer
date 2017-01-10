@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="RadioStreamerDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="RadioStreamerDB.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Channel">
           <Key>
             <PropertyRef Name="Id" />
@@ -166,7 +166,7 @@
         <Function Name="CalculateRecommendation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userName" Type="nvarchar" Mode="In" />
         </Function>
-        <EntityContainer Name="RadioStreamerDBModelStoreContainer">
+        <EntityContainer Name="RadioStreamerDBStoreContainer">
           <EntitySet Name="Channel" EntityType="Self.Channel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Favourite" EntityType="Self.Favourite" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="History" EntityType="Self.History" Schema="dbo" store:Type="Tables" />
@@ -207,10 +207,11 @@
             <End Role="TagsChannels" EntitySet="TagsChannels" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="RadioStreamerDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="RadioStreamerDB" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Channel">
           <Key>
             <PropertyRef Name="Id" />
@@ -243,9 +244,9 @@
           <Property Name="ChannelId" Type="Int64" Nullable="false" />
           <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Duration" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Channel" Relationship="Self.FK_History_Channels" FromRole="History" ToRole="Channel" />
           <NavigationProperty Name="User" Relationship="Self.FK_History_Users" FromRole="History" ToRole="User" />
-          <Property Name="Duration" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Rating">
           <Key>
@@ -385,7 +386,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="RadioStreamerDBEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="RadioStreamerDBEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Channel" EntityType="Self.Channel" />
           <EntitySet Name="Favourite" EntityType="Self.Favourite" />
           <EntitySet Name="History" EntityType="Self.History" />
@@ -425,19 +426,11 @@
             <End Role="Tag" EntitySet="Tag" />
             <End Role="TagsChannels" EntitySet="TagsChannels" />
           </AssociationSet>
-          <FunctionImport Name="CalculateRecommendation" ReturnType="Collection(RadioStreamerDBModel.CalculateRecommendation_Result)">
-          <Parameter Name="userName" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="CalculateRecommendation1" ReturnType="Collection(RadioStreamerDBModel.CalculateRecommendation1_Result)">
+          <FunctionImport Name="CalculateRecommendation" ReturnType="Collection(RadioStreamerDB.CalculateRecommendation_Result)">
             <Parameter Name="userName" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="CalculateRecommendation_Result">
-          <Property Type="Int64" Name="ChannelId" Nullable="true" />
-          <Property Type="String" Name="ChannelName" Nullable="true" MaxLength="255" />
-          <Property Type="Double" Name="Value" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="CalculateRecommendation1_Result">
           <Property Type="Int64" Name="ChannelId" Nullable="true" />
           <Property Type="String" Name="ChannelName" Nullable="true" MaxLength="255" />
           <Property Type="String" Name="StreamUrl" Nullable="true" MaxLength="255" />
@@ -448,9 +441,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="RadioStreamerDBModelStoreContainer" CdmEntityContainer="RadioStreamerDBEntities">
+        <EntityContainerMapping StorageEntityContainer="RadioStreamerDBStoreContainer" CdmEntityContainer="RadioStreamerDBEntities1">
           <EntitySetMapping Name="Channel">
-            <EntityTypeMapping TypeName="RadioStreamerDBModel.Channel">
+            <EntityTypeMapping TypeName="RadioStreamerDB.Channel">
               <MappingFragment StoreEntitySet="Channel">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -460,7 +453,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Favourite">
-            <EntityTypeMapping TypeName="RadioStreamerDBModel.Favourite">
+            <EntityTypeMapping TypeName="RadioStreamerDB.Favourite">
               <MappingFragment StoreEntitySet="Favourite">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -469,19 +462,19 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="History">
-            <EntityTypeMapping TypeName="RadioStreamerDBModel.History">
+            <EntityTypeMapping TypeName="RadioStreamerDB.History">
               <MappingFragment StoreEntitySet="History">
-                <ScalarProperty Name="Duration" ColumnName="Duration" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="ChannelId" ColumnName="ChannelId" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Rating">
-            <EntityTypeMapping TypeName="RadioStreamerDBModel.Rating">
+            <EntityTypeMapping TypeName="RadioStreamerDB.Rating">
               <MappingFragment StoreEntitySet="Rating">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -491,7 +484,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tag">
-            <EntityTypeMapping TypeName="RadioStreamerDBModel.Tag">
+            <EntityTypeMapping TypeName="RadioStreamerDB.Tag">
               <MappingFragment StoreEntitySet="Tag">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -499,7 +492,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TagsChannels">
-            <EntityTypeMapping TypeName="RadioStreamerDBModel.TagsChannels">
+            <EntityTypeMapping TypeName="RadioStreamerDB.TagsChannels">
               <MappingFragment StoreEntitySet="TagsChannels">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="TagId" ColumnName="TagId" />
@@ -508,7 +501,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="User">
-            <EntityTypeMapping TypeName="RadioStreamerDBModel.User">
+            <EntityTypeMapping TypeName="RadioStreamerDB.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
@@ -518,9 +511,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="CalculateRecommendation1" FunctionName="RadioStreamerDBModel.Store.CalculateRecommendation">
+          <FunctionImportMapping FunctionImportName="CalculateRecommendation" FunctionName="RadioStreamerDB.Store.CalculateRecommendation">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="RadioStreamerDBModel.CalculateRecommendation1_Result">
+              <ComplexTypeMapping TypeName="RadioStreamerDB.CalculateRecommendation_Result">
                 <ScalarProperty Name="ChannelId" ColumnName="ChannelId" />
                 <ScalarProperty Name="ChannelName" ColumnName="ChannelName" />
                 <ScalarProperty Name="StreamUrl" ColumnName="StreamUrl" />

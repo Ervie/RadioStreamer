@@ -92,35 +92,36 @@ $(document).ready(function () {
 
 // Stacja wybrana z dropdown
 $(document).ready(function () {
-    $("#station-list").on("click", ".channelRef", function () {
-        $.ajax({
-        	url: 'Home/GetChannel',
-            type: "GET",
-            data: {
-                'channelName': event.target.id,
-                'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()
-            },
-            success: function (data, textStatus, jqXHR) {
+	$("#station-list").on("click", ".channelRef", function () {
+		if (currentChannelName != event.target.id) {
+			$.ajax({
+				url: 'Home/GetChannel',
+				type: "GET",
+				data: {
+					'channelName': event.target.id,
+					'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()
+				},
+				success: function (data, textStatus, jqXHR) {
 
-                var stream = {
-                	title: data.Name,
-                	mp3: data.StreamUrl
-                };
+					var stream = {
+						title: data.Name,
+						mp3: data.StreamUrl
+					};
 
-                imgSrc = data.ImagePath;
+					imgSrc = data.ImagePath;
 
-                $('#jquery_jplayer_1').jPlayer('setMedia', stream);
-                $("#currentChannelLogo").attr('src', imgSrc);
+					$('#jquery_jplayer_1').jPlayer('setMedia', stream);
+					$("#currentChannelLogo").attr('src', imgSrc);
 
-                logListeningTime();
-                currentChannelName = data.Name;
-                currentChannelUrl = data.StreamUrl;
+					logListeningTime();
+					currentChannelName = data.Name;
+					currentChannelUrl = data.StreamUrl;
 
-                startDate = new Date();
-                loadAdditionalInfo();
-            }
-        })
-
+					startDate = new Date();
+					loadAdditionalInfo();
+				}
+			})
+		}
     });
 });
 
@@ -128,34 +129,35 @@ $(document).ready(function () {
 // Stacja wybrana z ulubionych
 $(document).ready(function () {
 	$("#favorite-list").on("click", ".channelRef", function () {
-		$.ajax({
-			url: 'Home/GetChannel',
-			type: "GET",
-			data: {
-				'channelName': event.target.id,
-				'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()
-			},
-			success: function (data, textStatus, jqXHR) {
+		if (currentChannelName != event.target.id) {
+			$.ajax({
+				url: 'Home/GetChannel',
+				type: "GET",
+				data: {
+					'channelName': event.target.id,
+					'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()
+				},
+				success: function (data, textStatus, jqXHR) {
 
-				var stream = {
-					title: data.Name,
-					mp3: data.StreamUrl
-				};
+					var stream = {
+						title: data.Name,
+						mp3: data.StreamUrl
+					};
 
-				imgSrc = data.ImagePath;
+					imgSrc = data.ImagePath;
 
-				$('#jquery_jplayer_1').jPlayer('setMedia', stream);
-				$("#currentChannelLogo").attr('src', imgSrc);
+					$('#jquery_jplayer_1').jPlayer('setMedia', stream);
+					$("#currentChannelLogo").attr('src', imgSrc);
 
-				logListeningTime();
-				currentChannelName = data.Name;
-				currentChannelUrl = data.StreamUrl;
+					logListeningTime();
+					currentChannelName = data.Name;
+					currentChannelUrl = data.StreamUrl;
 
-				startDate = new Date();
-				loadAdditionalInfo();
-			}
-		})
-
+					startDate = new Date();
+					loadAdditionalInfo();
+				}
+			})
+		}
 	});
 });
 

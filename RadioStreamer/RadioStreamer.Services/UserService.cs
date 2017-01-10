@@ -27,6 +27,9 @@ namespace RadioStreamer.Services
         {
             User matchingUsernname = context.User.Where(u => u.Login.Equals(user.Login)).FirstOrDefault();
 
+			if (matchingUsernname == null)
+				return null;
+
             string userSalt = matchingUsernname.Salt;
 
             if (userSalt != null)
