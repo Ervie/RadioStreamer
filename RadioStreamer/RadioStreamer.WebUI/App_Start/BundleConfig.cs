@@ -38,9 +38,8 @@ namespace RadioStreamer.WebUI
                       "~/Content/bootstrap.css",
                       "~/Content/Site.css"));
 
-            bundles.Add(new StyleBundle("~/Content/player").Include(
-                      "~/Content/Player/jplayer.pink.flag.css",
-                      "~/Content/Player/star-rating.css"));
+            bundles.Add(new StyleBundle("~/Content/playerAdditional").Include(
+					  "~/Content/Player/star-rating.css"));
 
             BundleTable.EnableOptimizations = true;
         }

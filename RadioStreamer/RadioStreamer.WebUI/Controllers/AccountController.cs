@@ -21,12 +21,10 @@ namespace RadioStreamer.WebUI.Controllers
         [AllowAnonymous]
         public ActionResult Login()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                Session["UserId"] = string.Empty;
-                Session["Username"] = string.Empty;
 
-            }
+            Session["UserId"] = string.Empty;
+            Session["Username"] = string.Empty;
+				
             return View();
         }
 
