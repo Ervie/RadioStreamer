@@ -10,9 +10,10 @@ var thirdChannelUrl;
 // Odświezanie polecanek  co minutę
 $(document).ready(function () {
     // pierwszy raz od razu przy wczytaniu
-    refreshSidebar()
+	refreshSidebar();
 
-    setInterval(refreshSidebar, 60000)
+    setInterval(refreshSidebar, 60000);
+    setInterval(refreshElements, 60000);
 });
 
 function refreshSidebar() {
@@ -45,6 +46,60 @@ function refreshSidebar() {
         }
     });
 };
+
+// Przeładowanie listy ulubionych, stanu checkboxa i ratingu aby ytrzymać konzystencję w przypadku kilku otwartych okien.
+function refreshElements() {
+	if (document.getElementById('squaredOne').checked) {
+		$.ajax({
+			url: 'Home/GetFavouriteList',
+			type: "POST",
+			data: {
+				'currentChannelName': currentChannelName,
+				'operation': "Add",
+				'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()
+			},
+			success: function (data, textStatus, jqXHR) {
+				var parsedData = $.parseJSON(data);
+				$("#favorite-list").empty();
+				$("#favorite-list").append("<li><a href='#' class='active'>Ulubione stacje</a></li>");
+				i = 0;
+				$.each(
+					parsedData,
+					function (i) {
+						$("#favorite-list").append("<li class='fav-channel'><a class='channelRef site-text' id='" + parsedData[i] + "'>" + parsedData[i] + "</a></li>");
+					}
+				)
+			}
+		})
+	}
+	else {
+		$.ajax({
+			url: 'Home/GetFavouriteList',
+			type: "POST",
+			data: {
+				'currentChannelName': currentChannelName,
+				'operation': "Delete",
+				'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()
+			},
+			success: function (data, textStatus, jqXHR) {
+				var parsedData = $.parseJSON(data);
+				$("#favorite-list").empty();
+				$("#favorite-list").append("<li><a href='#' class='active'>Ulubione stacje</a></li>");
+				i = 0;
+				$.each(
+					parsedData,
+					function (i) {
+						$("#favorite-list").append("<li class='fav-channel'><a class='channelRef site-text' id='" + parsedData[i] + "'>" + parsedData[i] + "</a></li>");
+					}
+				)
+			}
+		})
+	}
+
+	loadAdditionalInfo();
+};
+
+
 
 // Pierwsza sugestia
 $(document).ready(function () {
