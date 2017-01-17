@@ -181,6 +181,11 @@ function refreshMeta() {
     })
 };
 
+// Zalogowanie czasu przy zamknięciu strony
+$(window).unload(function () {
+	logListeningTime();
+});
+
 // Logowanie odsłuchanego czasu
 function logListeningTime() {
 
